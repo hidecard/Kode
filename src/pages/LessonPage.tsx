@@ -12,39 +12,89 @@ interface Lesson {
 
 interface LessonPageProps {
   category: string;
-  lessons: Lesson[];
+  lessons?: Lesson[];
+  lesson?: Lesson | null;
 }
 
-const LessonPage: React.FC<LessonPageProps> = ({ category }) => {
+const LessonPage: React.FC<LessonPageProps> = ({ category, lessons: passedLessons, lesson: initialLesson }) => {
   const { lessonId } = useParams<{ lessonId: string }>();
-  const [lesson, setLesson] = useState<Lesson | null>(null);
+  const [lesson, setLesson] = useState<Lesson | null>(initialLesson || null);
+  const [loading, setLoading] = useState<boolean>(!initialLesson);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
+    if (initialLesson) {
+      setLesson(initialLesson);
+      setLoading(false);
+      return;
+    }
+
     const loadLesson = async () => {
+      setLoading(true);
+      setError(null);
       try {
-        const response = await fetch(`/src/data/${category.toLowerCase()}-basics.json`);
-        const lessons: Lesson[] = await response.json();
-        const foundLesson = lessons.find(l => l.id === lessonId);
-        setLesson(foundLesson || null);
-      } catch (error) {
-        console.error('Error loading lesson:', error);
+        // dynamic import from src/data
+        const mod = await import(`../data/${category.toLowerCase()}-basics.json`);
+        const lessonsList: Lesson[] = mod.default || mod;
+        const found = lessonsList.find(l => l.id === lessonId);
+        setLesson(found || null);
+        if (!found) setError('Lesson not found.');
+      } catch (err) {
+        console.error('Error loading lesson:', err);
+        setError('Unable to load lesson data.');
+      } finally {
+        setLoading(false);
       }
     };
 
     loadLesson();
-  }, [lessonId, category]);
+  }, [lessonId, category, initialLesson]);
 
-  if (!lesson) {
-    return <div className="container mt-4">Loading lesson...</div>;
+  if (loading) {
+    return <div className="container mt-4 text-center"><div className="spinner-border text-primary" role="status" /></div>;
+  }
+
+  if (error || !lesson) {
+    return (
+      <div className="container mt-4">
+        <div className="alert alert-warning shadow-sm">
+          <h5 className="mb-1">Lesson unavailable</h5>
+          <p className="mb-0">{error || 'The lesson could not be found.'}</p>
+        </div>
+      </div>
+    );
   }
 
   return (
     <div className="container-fluid mt-4">
       <div className="row">
         <div className="col-12">
-          <h2>{lesson.title}</h2>
-          <div dangerouslySetInnerHTML={{ __html: lesson.description }} />
-          <TryEditor initialCode={lesson.example} lessonId={lesson.id} />
+          <div className="card shadow-sm border-0">
+            <div className="card-header bg-white d-flex flex-column flex-md-row align-items-md-center justify-content-between gap-3">
+              <div>
+                <h2 className="mb-1">{lesson.title}</h2>
+                <small className="text-muted">{category} • Lesson ID: <span className="badge bg-light text-dark">{lesson.id}</span></small>
+              </div>
+              <div className="text-md-end">
+                <button className="btn btn-outline-secondary me-2" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
+                  <i className="bi bi-arrow-up"></i> Top
+                </button>
+                <a className="btn btn-primary" href="#try-editor" onClick={(e) => { e.preventDefault(); document.getElementById('try-editor')?.scrollIntoView({ behavior: 'smooth' }); }}>
+                  <i className="bi bi-joystick me-1"></i>Try it
+                </a>
+              </div>
+            </div>
+
+            <div className="card-body">
+              <div className="mb-4">
+                <div className="lead" dangerouslySetInnerHTML={{ __html: lesson.description }} />
+              </div>
+
+              <div id="try-editor" className="mt-4">
+                <TryEditor initialCode={lesson.example} lessonId={lesson.id} />
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>

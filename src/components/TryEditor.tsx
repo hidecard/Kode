@@ -8,115 +8,137 @@ interface TryEditorProps {
 
 const TryEditor: React.FC<TryEditorProps> = ({ initialCode, lessonId }) => {
   const [code, setCode] = useState(initialCode);
+  const [statusMsg, setStatusMsg] = useState<string>('');
   const iframeRef = useRef<HTMLIFrameElement>(null);
 
-  // Update code when lesson changes
   useEffect(() => {
     setCode(initialCode);
   }, [initialCode]);
 
-  const runCode = () => {
-    if (!iframeRef.current) return;
-
-    let htmlContent = '';
-
-    // ✅ For Bootstrap Lessons
+  const buildHtml = (userCode: string) => {
     if (lessonId?.startsWith('bootstrap-')) {
-      htmlContent = `
-<!DOCTYPE html>
-<html lang="en">
+      return `<!doctype html>
+<html>
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Bootstrap Lesson</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
-<body class="p-3">
-  ${code}
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<body class="p-3 bg-light">
+  ${userCode}
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>`;
-    }
-
-    // ✅ For CSS Lessons
-    else if (lessonId?.startsWith('css-')) {
-      htmlContent = `
-<!DOCTYPE html>
-<html lang="en">
+    } else if (lessonId?.startsWith('css-')) {
+      return `<!doctype html>
+<html>
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>CSS Lesson</title>
-  <style>
-${code}
-  </style>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <style>${userCode}</style>
 </head>
 <body>
-  <h1>CSS Example</h1>
-  <p>This is a paragraph with some <span class="highlight">highlighted text</span>.</p>
-  <div class="container">
-      <div class="item">Item 1</div>
-      <div class="item">Item 2</div>
-      <div class="item">Item 3</div>
-  </div>
+  <h3>CSS Demo</h3>
+  <p class="demo">Sample paragraph</p>
 </body>
 </html>`;
     }
-
-    // ✅ For HTML or Default Lessons
-    else {
-      htmlContent = `
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>HTML Lesson</title>
-</head>
-<body>
-  ${code}
-</body>
+    return `<!doctype html>
+<html>
+<head><meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/></head>
+<body>${userCode}</body>
 </html>`;
-    }
-
-    // Refresh iframe to avoid caching issues
-    iframeRef.current.srcdoc = '';
-    setTimeout(() => {
-      if (iframeRef.current) {
-        iframeRef.current.srcdoc = htmlContent;
-      }
-    }, 20);
   };
 
-  // Automatically render once when component loads
+  const runCode = () => {
+    try {
+      setStatusMsg('');
+      const html = buildHtml(code);
+      if (!iframeRef.current) return;
+      iframeRef.current.srcdoc = html;
+      setStatusMsg('Rendered successfully');
+      setTimeout(() => setStatusMsg(''), 2000);
+    } catch (err) {
+      console.error(err);
+      setStatusMsg('Error rendering preview.');
+    }
+  };
+
+  const copyCode = async () => {
+    try {
+      await navigator.clipboard.writeText(code);
+      setStatusMsg('Code copied to clipboard');
+      setTimeout(() => setStatusMsg(''), 1500);
+    } catch {
+      setStatusMsg('Copy failed');
+      setTimeout(() => setStatusMsg(''), 1500);
+    }
+  };
+
+  const downloadCode = () => {
+    const blob = new Blob([code], { type: 'text/plain' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `${lessonId || 'snippet'}.html`;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    URL.revokeObjectURL(url);
+    setStatusMsg('Downloaded');
+    setTimeout(() => setStatusMsg(''), 1500);
+  };
+
+  // auto render when initialCode changes (or on mount)
   useEffect(() => {
     runCode();
-  }, [lessonId]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [initialCode]);
 
   return (
     <div className="try-editor mt-4">
-      <h5>Try it Yourself</h5>
-      <div className="row">
-        <div className="col-md-6">
+      <div className="row g-3">
+        <div className="col-12 col-md-6">
+          <label htmlFor="try-code" className="form-label visually-hidden">Code editor</label>
           <textarea
-            className="form-control"
-            rows={10}
+            id="try-code"
+            className="form-control font-monospace"
+            rows={16}
             value={code}
             onChange={(e) => setCode(e.target.value)}
-            style={{ fontFamily: 'monospace' }}
+            style={{ minHeight: 320 }}
+            aria-label="Code editor"
           />
-          <button className="btn btn-success mt-2" onClick={runCode}>
-            <i className="bi bi-play-fill me-1"></i>Run
-          </button>
+          <div className="d-flex gap-2 mt-2">
+            <button className="btn btn-success" onClick={runCode} aria-label="Run code">
+              <i className="bi bi-play-fill me-1" /> Run
+            </button>
+            <button className="btn btn-outline-secondary" onClick={copyCode} aria-label="Copy code">
+              <i className="bi bi-clipboard me-1" /> Copy
+            </button>
+            <button className="btn btn-outline-primary" onClick={downloadCode} aria-label="Download code">
+              <i className="bi bi-download me-1" /> Download
+            </button>
+            <div className="ms-auto align-self-center small text-muted" aria-live="polite">
+              {statusMsg}
+            </div>
+          </div>
         </div>
-        <div className="col-md-6">
-          <iframe
-            ref={iframeRef}
-            className="border rounded"
-            style={{ width: '100%', height: '350px' }}
-            title="Preview"
-            sandbox="allow-scripts allow-same-origin"
-          />
+
+        <div className="col-12 col-md-6 d-flex flex-column">
+          <div className="d-flex justify-content-between align-items-center mb-2">
+            <strong className="small mb-0">Preview</strong>
+            <small className="text-muted">Sandboxed iframe</small>
+          </div>
+          <div className="flex-grow-1">
+            <iframe
+              ref={iframeRef}
+              className="border rounded w-100"
+              style={{ height: 320, minHeight: 240 }}
+              title="Preview"
+              sandbox="allow-scripts allow-same-origin"
+            />
+          </div>
         </div>
       </div>
     </div>
