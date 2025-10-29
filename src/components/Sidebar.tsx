@@ -11,11 +11,12 @@ interface Lesson {
 interface SidebarProps {
   onCategorySelect: (category: string) => void;
   onLessonSelect: (lessonId: string) => void;
+  onQuizSelect: (category: string) => void;
   selectedCategory: string;
   lessons: { [key: string]: Lesson[] };
 }
 
-const Sidebar: React.FC<SidebarProps> = ({ onCategorySelect, onLessonSelect, selectedCategory, lessons }) => {
+const Sidebar: React.FC<SidebarProps> = ({ onCategorySelect, onLessonSelect, onQuizSelect, selectedCategory, lessons }) => {
   const [isOpen, setIsOpen] = useState(true);
 
   const categories = ['HTML', 'CSS', 'Bootstrap'];
@@ -58,6 +59,14 @@ const Sidebar: React.FC<SidebarProps> = ({ onCategorySelect, onLessonSelect, sel
                             </button>
                           </li>
                         ))}
+                        <li>
+                          <button
+                            className="btn btn-link text-decoration-none"
+                            onClick={() => onQuizSelect(category.toLowerCase())}
+                          >
+                            <i className="bi bi-question-circle me-1"></i>Quiz
+                          </button>
+                        </li>
                       </ul>
                     )}
                   </li>

@@ -5,6 +5,7 @@ import 'bootstrap-icons/font/bootstrap-icons.css';
 import Sidebar from './components/Sidebar';
 import Home from './pages/Home';
 import LessonPage from './pages/LessonPage';
+import QuizPage from './pages/QuizPage';
 import htmlData from './data/html-basics.json';
 import cssData from './data/css-basics.json';
 import bootstrapData from './data/bootstrap-basics.json';
@@ -59,6 +60,10 @@ function AppContent() {
     navigate(`/${categorySlug}/${lessonId}`);
   };
 
+  const handleQuizSelect = (category: string) => {
+    navigate(`/quiz/${category}`);
+  };
+
   return (
     <div className="App">
       <nav className="navbar navbar-expand-lg navbar-dark bg-success">
@@ -80,6 +85,7 @@ function AppContent() {
           <Sidebar
             onCategorySelect={handleCategorySelect}
             onLessonSelect={handleLessonSelect}
+            onQuizSelect={handleQuizSelect}
             selectedCategory={selectedCategory}
             lessons={lessons}
           />
@@ -89,6 +95,7 @@ function AppContent() {
               <Route path="/html/:lessonId" element={<LessonPage category="HTML" lessons={lessons.HTML || []} />} />
               <Route path="/css/:lessonId" element={<LessonPage category="CSS" lessons={lessons.CSS || []} />} />
               <Route path="/bootstrap/:lessonId" element={<LessonPage category="Bootstrap" lessons={lessons.Bootstrap || []} />} />
+              <Route path="/quiz/:category" element={<QuizPage />} />
             </Routes>
           </div>
         </div>
