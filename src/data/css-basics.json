@@ -1,0 +1,80 @@
+[
+  {
+    "id": "css-intro",
+    "title": "CSS Introduction",
+    "description": "<p>CSS (Cascading Style Sheets) is used to describe the presentation of a document written in HTML. CSS describes how HTML elements should be displayed.</p><p>CSS can control the layout of multiple web pages all at once.</p>",
+    "example": "body {\n  background-color: lightblue;\n}\n\nh1 {\n  color: white;\n  text-align: center;\n}\n\np {\n  font-family: verdana;\n  font-size: 20px;\n}"
+  },
+  {
+    "id": "css-selectors",
+    "title": "CSS Selectors",
+    "description": "<p>CSS selectors are used to find (or select) the HTML elements you want to style. There are several different types of selectors in CSS.</p><p>The most common selectors are element selectors, class selectors, and ID selectors.</p>",
+    "example": "/* Element selector */\np {\n  color: red;\n}\n\n/* Class selector */\n.highlight {\n  background-color: yellow;\n}\n\n/* ID selector */\n#unique {\n  font-size: 24px;\n}"
+  },
+  {
+    "id": "css-box-model",
+    "title": "CSS Box Model",
+    "description": "<p>The CSS box model describes the rectangular boxes that are generated for elements in the document tree. Every box consists of four areas: content, padding, border, and margin.</p><p>Understanding the box model is crucial for layout control in CSS.</p>",
+    "example": "div {\n  width: 200px;\n  padding: 20px;\n  border: 5px solid black;\n  margin: 10px;\n  background-color: lightgray;\n}"
+  },
+  {
+    "id": "css-positioning",
+    "title": "CSS Positioning",
+    "description": "<p>The CSS position property specifies the type of positioning method used for an element. The five main types are static, relative, absolute, fixed, and sticky.</p><p>Positioning helps control where elements appear on the page.</p>",
+    "example": ".box {\n  width: 100px;\n  height: 100px;\n  background-color: coral;\n  position: absolute;\n  top: 50px;\n  left: 100px;\n}"
+  },
+  {
+    "id": "css-zindex",
+    "title": "CSS Z-Index",
+    "description": "<p>The z-index property specifies the stack order of an element. An element with a greater z-index is always in front of an element with a lower z-index.</p><p>It only works on positioned elements (position: absolute, relative, fixed, or sticky).</p>",
+    "example": ".box1 {\n  position: absolute;\n  z-index: 1;\n  background-color: red;\n}\n\n.box2 {\n  position: absolute;\n  z-index: 2;\n  background-color: blue;\n}"
+  },
+  {
+    "id": "css-flexbox",
+    "title": "CSS Flexbox",
+    "description": "<p>Flexbox is a one-dimensional layout method for arranging items in rows or columns. Items flex (expand) to fill additional space or shrink to fit into smaller spaces.</p><p>The main idea behind flexbox is to give the container the ability to alter its items' width/height to best fill the available space.</p>",
+    "example": ".container {\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n}\n\n.item {\n  flex: 1;\n  margin: 10px;\n  padding: 20px;\n  background-color: lightblue;\n}"
+  },
+  {
+    "id": "css-grid",
+    "title": "CSS Grid",
+    "description": "<p>CSS Grid Layout is a two-dimensional layout method for the web. It lets you lay content out in rows and columns, and has many features that make building complex layouts straightforward.</p><p>Grid is a powerful specification that, when combined with other parts of CSS such as flexbox, provides even more layout possibilities.</p>",
+    "example": ".container {\n  display: grid;\n  grid-template-columns: 1fr 2fr 1fr;\n  grid-template-rows: 100px 200px;\n  gap: 10px;\n}\n\n.item {\n  background-color: lightblue;\n  padding: 20px;\n}"
+  },
+  {
+    "id": "css-animations",
+    "title": "CSS Animations",
+    "description": "<p>CSS animations make it possible to animate transitions from one CSS style configuration to another. Animations consist of two components: a style describing the CSS animation and a set of keyframes that indicate the start and end states of the animation's style.</p><p>CSS animations are a powerful way to add visual interest to your web pages without using JavaScript.</p>",
+    "example": ".animated-element {\n  animation: slideIn 2s ease-in-out;\n}\n\n@keyframes slideIn {\n  from {\n    transform: translateX(-100%);\n    opacity: 0;\n  }\n  to {\n    transform: translateX(0);\n    opacity: 1;\n  }\n}"
+  },
+  {
+    "id": "css-responsive",
+    "title": "Responsive Design",
+    "description": "<p>Responsive web design makes your web page look good on all devices. Responsive web design uses only HTML and CSS. Responsive web design is not a program or a JavaScript.</p><p>Media queries are a key part of responsive web design, as they allow you to apply different styles for different screen sizes.</p>",
+    "example": "/* Mobile first */\n.container {\n  width: 100%;\n  padding: 10px;\n}\n\n/* Tablet */\n@media (min-width: 768px) {\n  .container {\n    width: 750px;\n    margin: 0 auto;\n  }\n}\n\n/* Desktop */\n@media (min-width: 992px) {\n  .container {\n    width: 970px;\n  }\n}"
+  },
+  {
+    "id": "css-variables",
+    "title": "CSS Variables (Custom Properties)",
+    "description": "<p>CSS variables are entities defined by CSS authors that contain specific values to be reused throughout a document. They make it easier to maintain and update design themes.</p><p>Variables are declared within a CSS selector using two dashes (--), and accessed with the var() function.</p>",
+    "example": ":root {\n  --main-color: #3498db;\n  --padding: 10px;\n}\n\nbutton {\n  background-color: var(--main-color);\n  padding: var(--padding);\n  color: white;\n  border: none;\n  border-radius: 5px;\n}"
+  },
+  {
+    "id": "css-transitions",
+    "title": "CSS Transitions",
+    "description": "<p>CSS transitions allow you to change property values smoothly (over a given duration) rather than instantly.</p><p>Transitions make hover effects, color changes, and animations smoother and more appealing.</p>",
+    "example": "button {\n  background-color: skyblue;\n  transition: background-color 0.5s ease;\n}\n\nbutton:hover {\n  background-color: royalblue;\n  color: white;\n}"
+  },
+  {
+    "id": "css-pseudo-classes",
+    "title": "CSS Pseudo-Classes and Pseudo-Elements",
+    "description": "<p>Pseudo-classes target elements based on their state (like :hover or :focus). Pseudo-elements create elements that don’t exist in the HTML (like ::before or ::after).</p><p>These are useful for styling dynamic states and adding decorative content.</p>",
+    "example": "a:hover {\n  color: red;\n}\n\nbutton:focus {\n  outline: 2px solid blue;\n}\n\np::first-letter {\n  font-size: 24px;\n  color: darkblue;\n}\n\np::after {\n  content: ' ★';\n}"
+  },
+  {
+    "id": "css-transforms",
+    "title": "CSS Transforms",
+    "description": "<p>CSS transforms allow you to rotate, scale, move, and skew elements in 2D or 3D space. The transform property modifies the coordinate space of the CSS visual formatting model.</p>",
+    "example": "div {\n  width: 100px;\n  height: 100px;\n  background-color: coral;\n  transform: rotate(45deg) scale(1.2);\n  transition: transform 0.5s;\n}\n\ndiv:hover {\n  transform: rotate(0deg) scale(1);\n}"
+  }
+]

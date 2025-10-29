@@ -1,0 +1,35 @@
+{
+  "quizTitle": "HTML Quiz",
+  "questions": [
+    {
+      "question": "What does HTML stand for?",
+      "options": ["Hyper Text Markup Language", "Home Tool Markup Language", "Hyperlinks and Text Markup Language", "Hyper Tool Markup Language"],
+      "correct": 0
+    },
+    {
+      "question": "Which tag is used to create a hyperlink?",
+      "options": ["<link>", "<a>", "<href>", "<url>"],
+      "correct": 1
+    },
+    {
+      "question": "What is the correct HTML element for the largest heading?",
+      "options": ["<h6>", "<head>", "<h1>", "<heading>"],
+      "correct": 2
+    },
+    {
+      "question": "Which input type defines a slider control?",
+      "options": ["slider", "range", "controls", "search"],
+      "correct": 1
+    },
+    {
+      "question": "Which element defines navigation links?",
+      "options": ["<nav>", "<navigate>", "<navigation>", "<navlinks>"],
+      "correct": 0
+    },
+    {
+      "question": "What does the <video> element require for best browser support?",
+      "options": ["Multiple <source> elements", "A single src attribute", "JavaScript controls", "CSS styling"],
+      "correct": 0
+    }
+  ]
+}
