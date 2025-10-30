@@ -63,12 +63,13 @@
 
 The application now features a cohesive, modern premium design that enhances user engagement while maintaining excellent usability and performance.
 
-## 📋 Current Task: Update All Quiz Level Selection Pages UI to Match Home Page Design
-- [x] Modify QuizPage.tsx to apply light theme styling (bg-white text-dark) to the entire card when no level is selected for all categories
+## 📋 Current Task: Update LessonPage UI to Match Home Page Design
+- [x] Modify LessonPage.tsx to apply light theme styling (bg-white text-dark) to the entire card for consistency with Home page
 - [x] Update text colors to text-muted for better contrast on light background
-- [x] Change level selection buttons to btn-outline-dark for consistency with Home page styling
-- [ ] Test all quiz level selection pages (HTML, CSS, Bootstrap) to ensure they match Home page visual design
-- [ ] Verify the quiz taking experience remains dark themed when level is selected
+- [x] Change buttons to btn-outline-dark for consistency with Home page styling
+- [x] Update card header styling to match Home page design
+- [ ] Test the LessonPage to ensure it matches Home page visual design
+- [ ] Verify the TryEditor component remains functional
 
 ## 📋 Next Steps (Optional Enhancements)
 - [ ] Add more interactive animations

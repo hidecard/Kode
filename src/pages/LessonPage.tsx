@@ -71,7 +71,7 @@ const LessonPage: React.FC<LessonPageProps> = ({ category, lessons: passedLesson
       <div className="container-fluid mt-4">
         <div className="row justify-content-center">
           <div className="col-lg-10">
-            <div className="card bg-dark text-white shadow-sm">
+            <div className="card bg-white text-dark shadow-sm">
               <div className="card-body text-center">
                 <div className="spinner-border text-primary" role="status" />
               </div>
@@ -87,7 +87,7 @@ const LessonPage: React.FC<LessonPageProps> = ({ category, lessons: passedLesson
       <div className="container-fluid mt-4">
         <div className="row justify-content-center">
           <div className="col-lg-10">
-            <div className="card bg-dark text-white shadow-sm">
+            <div className="card bg-white text-dark shadow-sm">
               <div className="card-body">
                 <div className="alert alert-warning shadow-sm" style={{ backgroundColor: 'rgba(245, 158, 11, 0.1)', borderColor: '#f59e0b', color: '#fbbf24' }}>
                   <h5 className="mb-1">Lesson unavailable</h5>
@@ -105,14 +105,14 @@ const LessonPage: React.FC<LessonPageProps> = ({ category, lessons: passedLesson
     <div className="container-fluid mt-4">
       <div className="row justify-content-center">
         <div className="col-lg-10">
-          <div className="card bg-dark text-white shadow-sm">
-            <div className="card-header d-flex flex-column flex-md-row align-items-md-center justify-content-between gap-3" style={{ backgroundColor: 'rgba(255,255,255,0.1)', borderBottom: '1px solid rgba(255,255,255,0.2)' }}>
+          <div className="card bg-white text-dark shadow-sm">
+            <div className="card-header d-flex flex-column flex-md-row align-items-md-center justify-content-between gap-3" style={{ backgroundColor: 'rgba(0,0,0,0.05)', borderBottom: '1px solid rgba(0,0,0,0.1)' }}>
               <div>
-                <h2 className="mb-1 text-white">{lesson.title}</h2>
+                <h2 className="mb-1 text-dark">{lesson.title}</h2>
                 <small className="text-muted">{category} • Lesson ID: <span className="badge bg-secondary text-white">{lesson.id}</span></small>
               </div>
               <div className="text-md-end">
-                <button className="btn btn-outline-light me-2" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
+                <button className="btn btn-outline-dark me-2" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
                   <i className="bi bi-arrow-up"></i> Top
                 </button>
                 <a className="btn btn-primary" href="#try-editor" onClick={(e) => { e.preventDefault(); document.getElementById('try-editor')?.scrollIntoView({ behavior: 'smooth' }); }}>
