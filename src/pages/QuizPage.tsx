@@ -208,7 +208,7 @@ const QuizPage: React.FC = () => {
     <div className="container-fluid mt-4">
       <div className="row justify-content-center">
         <div className="col-lg-10">
-          <div className="card bg-dark text-white shadow-sm">
+          <div className={`card ${!level ? 'bg-white text-dark' : 'bg-dark text-white'} shadow-sm`}>
             <div className="card-body">
               {!level ? (
                 <>
@@ -218,7 +218,7 @@ const QuizPage: React.FC = () => {
                     {LEVELS.map(l => (
                       <button
                         key={l}
-                        className="btn btn-outline-light"
+                        className="btn btn-outline-dark"
                         onClick={() => setLevel(l)}
                       >
                         {l[0].toUpperCase() + l.slice(1)}

@@ -63,12 +63,12 @@
 
 The application now features a cohesive, modern premium design that enhances user engagement while maintaining excellent usability and performance.
 
-## 📋 Current Task: Update Bootstrap Quiz Level Selection UI to Match Home Page Design
-- [x] Modify QuizPage.tsx to apply light theme styling (bg-white text-dark) to panel-header when category is 'bootstrap' and no level is selected
-- [x] Update text colors from text-white-50 to text-muted for better contrast on light background
+## 📋 Current Task: Update All Quiz Level Selection Pages UI to Match Home Page Design
+- [x] Modify QuizPage.tsx to apply light theme styling (bg-white text-dark) to the entire card when no level is selected for all categories
+- [x] Update text colors to text-muted for better contrast on light background
 - [x] Change level selection buttons to btn-outline-dark for consistency with Home page styling
-- [ ] Test the Bootstrap quiz level selection page to ensure it matches Home page visual design
-- [ ] Verify the change only affects Bootstrap category and doesn't impact other quiz categories
+- [ ] Test all quiz level selection pages (HTML, CSS, Bootstrap) to ensure they match Home page visual design
+- [ ] Verify the quiz taking experience remains dark themed when level is selected
 
 ## 📋 Next Steps (Optional Enhancements)
 - [ ] Add more interactive animations
