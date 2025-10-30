@@ -63,13 +63,14 @@
 
 The application now features a cohesive, modern premium design that enhances user engagement while maintaining excellent usability and performance.
 
-## 📋 Current Task: Remove Restart Level Button and Update Navbar Style
-- [x] Remove the "Restart level" button from QuizPage.tsx
-- [x] Update navbar styling to match the new light theme design
-- [x] Change navbar background to light theme with dark text
-- [x] Update navbar buttons to use btn-outline-dark styling
-- [ ] Test the navbar changes across all pages
-- [ ] Verify quiz functionality remains intact after removing restart button
+## 📋 Current Task: Add JS Quiz Questions and Update Choose Level Page UI
+- [x] Create JS basics data file (src/data/js-basics.json)
+- [x] Create JS quiz questions file (src/data/quizzes/js-quiz.json)
+- [x] Update App.tsx to include JavaScript in categories
+- [x] Update QuizPage.tsx level selection UI to match Home page design (glass effect, premium styling)
+- [x] Update Sidebar.tsx to include JS links if needed
+- [ ] Test JS quiz functionality and UI consistency
+- [ ] Verify all quiz categories work correctly
 
 ## 📋 Next Steps (Optional Enhancements)
 - [ ] Add more interactive animations

@@ -212,21 +212,40 @@ const QuizPage: React.FC = () => {
             <div className="card-body">
               {!level ? (
                 <>
-                  <h3 className="mb-3">{(key || 'HTML').toUpperCase()} — Choose level</h3>
-                  <p className="text-muted">Select a difficulty level. Each level contains curated questions.</p>
-                  <div className="d-flex gap-2 flex-wrap mb-3">
-                    {LEVELS.map(l => (
-                      <button
-                        key={l}
-                        className="btn btn-outline-dark"
-                        onClick={() => setLevel(l)}
-                      >
-                        {l[0].toUpperCase() + l.slice(1)}
-                      </button>
-                    ))}
+                  <div className="text-center mb-4">
+                    <h3 className="mb-3">{(key || 'HTML').toUpperCase()} — Choose level</h3>
+                    <p className="text-muted">Select a difficulty level. Each level contains curated questions.</p>
                   </div>
-                  <div className="text-muted small">
-                    Tip: you can switch level after finishing a quiz using the "Change level" button.
+                  <div className="row justify-content-center">
+                    <div className="col-md-8">
+                      <div className="row g-3">
+                        {LEVELS.map(l => (
+                          <div key={l} className="col-md-4">
+                            <div className="card h-100 glass-effect border-0 shadow-sm">
+                              <div className="card-body text-center">
+                                <h5 className="card-title text-dark">{l[0].toUpperCase() + l.slice(1)}</h5>
+                                <p className="card-text text-muted small">
+                                  {l === 'basic' ? 'Perfect for beginners' :
+                                   l === 'intermediate' ? 'For those with some experience' :
+                                   'Advanced concepts and challenges'}
+                                </p>
+                                <button
+                                  className="btn btn-primary w-100"
+                                  onClick={() => setLevel(l)}
+                                >
+                                  Start {l[0].toUpperCase() + l.slice(1)} Quiz
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                  <div className="text-center mt-4">
+                    <div className="text-muted small">
+                      Tip: you can switch level after finishing a quiz using the "Change level" button.
+                    </div>
                   </div>
                 </>
               ) : (

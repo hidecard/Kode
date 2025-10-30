@@ -76,7 +76,7 @@ function AppContent() {
 
 
 
-  const categories = ['HTML', 'CSS', 'Bootstrap'];
+  const categories = ['HTML', 'CSS', 'Bootstrap', 'JavaScript'];
 
   // compact premium CSS injected so no new files are required
   const premiumCss = `

@@ -33,7 +33,7 @@ const Sidebar: React.FC<SidebarProps> = ({ onCategorySelect, onQuizSelect, selec
     }
   }, []);
 
-  const categories = ['HTML', 'CSS', 'Bootstrap'];
+  const categories = ['HTML', 'CSS', 'Bootstrap', 'JavaScript'];
 
   // Desktop vertical sidebar (collapsible)
   if (isDesktop) {
@@ -69,7 +69,7 @@ const Sidebar: React.FC<SidebarProps> = ({ onCategorySelect, onQuizSelect, selec
             <ul className="list-unstyled mb-0">
               {categories.map((cat) => {
                 const isActive = selectedCategory === cat;
-                const iconClass = cat === 'HTML' ? 'bi bi-code-slash' : cat === 'CSS' ? 'bi bi-palette' : 'bi bi-bootstrap';
+                const iconClass = cat === 'HTML' ? 'bi bi-code-slash' : cat === 'CSS' ? 'bi bi-palette' : cat === 'Bootstrap' ? 'bi bi-bootstrap' : 'bi bi-braces';
                 return (
                   <li key={cat} className="mb-2">
                     <div className="d-flex align-items-center justify-content-between">

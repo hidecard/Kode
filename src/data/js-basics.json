@@ -1,0 +1,32 @@
+[
+  {
+    "id": "js-intro",
+    "title": "JavaScript Introduction",
+    "description": "<p>JavaScript is a programming language that adds interactivity to your website. It is a scripting language that runs in the browser and allows you to create dynamic content.</p><p>JavaScript can update and change both HTML and CSS, calculate, manipulate and validate data.</p>",
+    "example": "<!DOCTYPE html>\n<html>\n<body>\n\n<h1>My First JavaScript</h1>\n\n<p id=\"demo\">A Paragraph</p>\n\n<button type=\"button\" onclick=\"document.getElementById('demo').innerHTML = 'Hello JavaScript!'\">Click Me!</button>\n\n</body>\n</html>"
+  },
+  {
+    "id": "js-variables",
+    "title": "JavaScript Variables",
+    "description": "<p>Variables are containers for storing data values. In JavaScript, you declare variables using var, let, or const keywords.</p><p>var is function-scoped, let and const are block-scoped. Use const for values that won't change, let for values that will.</p>",
+    "example": "// Variable declaration\nvar x = 5;\nvar y = 6;\nvar z = x + y;\n\n// Let and const\nlet name = \"John\";\nconst PI = 3.14159;\n\n// Variable types\nlet text = \"Hello\";        // String\nlet number = 42;           // Number\nlet boolean = true;        // Boolean\nlet array = [1, 2, 3];     // Array\nlet object = {name: \"John\", age: 30}; // Object"
+  },
+  {
+    "id": "js-functions",
+    "title": "JavaScript Functions",
+    "description": "<p>A function is a block of code designed to perform a particular task. Functions are executed when they are called (invoked).</p><p>Functions can take parameters and return values. They help organize code and make it reusable.</p>",
+    "example": "// Function declaration\nfunction greet(name) {\n  return \"Hello \" + name;\n}\n\n// Function call\nlet message = greet(\"John\");\nconsole.log(message); // Output: Hello John\n\n// Arrow function\nconst add = (a, b) => a + b;\nconsole.log(add(5, 3)); // Output: 8\n\n// Function expression\nconst multiply = function(a, b) {\n  return a * b;\n};"
+  },
+  {
+    "id": "js-events",
+    "title": "JavaScript Events",
+    "description": "<p>Events are actions that happen in the browser, like clicking a button, hovering over an element, or pressing a key.</p><p>JavaScript can react to these events by executing code. Event handlers can be added using HTML attributes, properties, or addEventListener().</p>",
+    "example": "<!-- HTML -->\n<button id=\"myButton\">Click me</button>\n<p id=\"output\"></p>\n\n<script>\n// Method 1: HTML attribute\n// <button onclick=\"changeText()\">Click me</button>\n\nfunction changeText() {\n  document.getElementById(\"output\").innerHTML = \"Button clicked!\";\n}\n\n// Method 2: addEventListener (recommended)\ndocument.getElementById(\"myButton\").addEventListener(\"click\", function() {\n  document.getElementById(\"output\").innerHTML = \"Button clicked!\";\n});\n\n// Multiple event types\ndocument.getElementById(\"myButton\").addEventListener(\"mouseover\", function() {\n  this.style.backgroundColor = \"lightblue\";\n});\n</script>"
+  },
+  {
+    "id": "js-dom",
+    "title": "DOM Manipulation",
+    "description": "<p>The DOM (Document Object Model) is a programming interface for HTML and XML documents. It represents the page as a tree of objects that can be manipulated with JavaScript.</p><p>You can change content, styles, and structure of HTML elements using DOM methods.</p>",
+    "example": "<!-- HTML -->\n<div id=\"container\">\n  <h1 id=\"title\">Hello World</h1>\n  <p class=\"text\">This is a paragraph.</p>\n</div>\n\n<script>\n// Get elements by ID, class, tag name\nconst title = document.getElementById(\"title\");\nconst texts = document.getElementsByClassName(\"text\");\nconst paragraphs = document.getElementsByTagName(\"p\");\n\n// Change content\ntitle.innerHTML = \"Hello JavaScript!\";\n\n// Change styles\ntitle.style.color = \"red\";\ntitle.style.fontSize = \"24px\";\n\n// Create new elements\nconst newParagraph = document.createElement(\"p\");\nnewParagraph.textContent = \"New paragraph added!\";\ndocument.getElementById(\"container\").appendChild(newParagraph);\n\n// Remove elements\nconst element = document.getElementById(\"title\");\nelement.parentNode.removeChild(element);\n</script>"
+  }
+]
