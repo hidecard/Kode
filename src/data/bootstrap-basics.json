@@ -26,7 +26,7 @@
   {
     "id": "bootstrap-customization",
     "title": "Bootstrap Customization",
-    "description": "<p>Bootstrap can be customized to fit your brand or design needs. You can customize Bootstrap's Sass variables, override built-in styles, or create your own themes.</p><p>Customizing Bootstrap allows you to create unique designs while still leveraging Bootstrap's powerful framework.</p>",
-    "example": "/* Custom variables */\n$primary: #007bff;\n$secondary: #6c757d;\n$success: #28a745;\n\n/* Custom component styles */\n.my-custom-button {\n  @extend .btn;\n  background-color: $primary;\n  border-color: $primary;\n  \n  &:hover {\n    background-color: darken($primary, 10%);\n    border-color: darken($primary, 10%);\n  }\n}"
+    "description": "<p>Bootstrap can be customized to fit your brand or design needs. You can override CSS variables or create custom styles to match your design.</p><p>Below is a small example of using CSS variables and a custom button style.</p>",
+    "example": "<!doctype html>\n<html>\n<head>\n  <meta charset=\"utf-8\" />\n  <meta name=\"viewport\" content=\"width=device-width,initial-scale=1\" />\n  <link href=\"https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css\" rel=\"stylesheet\">\n  <style>\n    :root {\n      --brand: #0069d9;\n      --brand-dark: #0053b3;\n    }\n    .my-custom-button {\n      background-color: var(--brand);\n      color: #fff;\n      border: 1px solid var(--brand-dark);\n      padding: 0.5rem 1rem;\n      border-radius: 6px;\n      box-shadow: 0 2px 6px rgba(0,0,0,0.08);\n    }\n    .my-custom-button:hover { background-color: var(--brand-dark); }\n  </style>\n</head>\n<body class=\"p-4\">\n  <div class=\"container\">\n    <h3 class=\"mb-3\">Customized button</h3>\n    <button class=\"my-custom-button\">Custom Brand Button</button>\n  </div>\n  <script src=\"https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js\"></script>\n</body>\n</html>"
   }
 ]

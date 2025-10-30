@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Routes, Route, useNavigate, useLocation, Link, useParams } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useNavigate, useLocation, Link } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
-import Sidebar from './components/Sidebar';
+import './styles/premium.css'; // new global premium styles
 import Home from './pages/Home';
 import LessonPage from './pages/LessonPage';
 import QuizPage from './pages/QuizPage';
@@ -46,33 +46,11 @@ class ErrorBoundary extends React.Component<{children: React.ReactNode}, {hasErr
 function AppContent() {
   const navigate = useNavigate();
   const location = useLocation();
-  const [selectedCategory, setSelectedCategory] = useState<string>('');
+  const [selectedCategory, setSelectedCategory] = useState<string>('HTML');
   const [lessons, setLessons] = useState<{ [key: string]: Lesson[] }>({});
-  const [searchQuery, setSearchQuery] = useState<string>('');
-  // navCollapsed removed to prevent slide/collapse navbar behavior
-
-  // UI/UX enhancements
   const [darkMode, setDarkMode] = useState<boolean>(false);
-  const [searchResultMsg, setSearchResultMsg] = useState<string>('');
 
   useEffect(() => {
-    // apply theme class to body
-    if (darkMode) {
-      document.body.classList.add('bg-dark', 'text-light');
-    } else {
-      document.body.classList.remove('bg-dark', 'text-light');
-    }
-  }, [darkMode]);
-
-  // ensure content isn't hidden under the fixed navbar
-  useEffect(() => {
-    const prevPadding = document.body.style.paddingTop;
-    document.body.style.paddingTop = '64px'; // adjust if navbar height changes
-    return () => { document.body.style.paddingTop = prevPadding; };
-  }, []);
-
-  useEffect(() => {
-    // Load data statically
     const loadedLessons: { [key: string]: Lesson[] } = {
       HTML: htmlData,
       CSS: cssData,
@@ -81,32 +59,18 @@ function AppContent() {
     setLessons(loadedLessons);
   }, []);
 
-  // Derive selectedCategory from the current path and available lessons.
   useEffect(() => {
     const path = location.pathname.toLowerCase();
-    if (path.startsWith('/html')) {
-      setSelectedCategory('HTML');
-      return;
-    }
-    if (path.startsWith('/css')) {
-      setSelectedCategory('CSS');
-      return;
-    }
-    if (path.startsWith('/bootstrap')) {
-      setSelectedCategory('Bootstrap');
-      return;
-    }
-    if (Object.keys(lessons).length > 0) {
-      setSelectedCategory(prev => prev || 'HTML');
-    }
-  }, [location.pathname, lessons]);
+    if (path.startsWith('/quiz/html') || path.startsWith('/html')) setSelectedCategory('HTML');
+    else if (path.startsWith('/quiz/css') || path.startsWith('/css')) setSelectedCategory('CSS');
+    else if (path.startsWith('/quiz/bootstrap') || path.startsWith('/bootstrap')) setSelectedCategory('Bootstrap');
+  }, [location.pathname]);
 
   const handleCategorySelect = (category: string) => {
     setSelectedCategory(category);
-    navigate('/');
+    navigate(`/quiz/${category.toLowerCase()}`);
   };
 
-  // Infer category if missing (helps direct /reload navigation)
   const handleLessonSelect = (lessonId: string) => {
     let category = selectedCategory;
     if (!category) {
@@ -126,238 +90,147 @@ function AppContent() {
   };
 
   const isLoaded = Object.keys(lessons).length > 0;
+  const categories = ['HTML', 'CSS', 'Bootstrap'];
 
-  // Search: find first lesson whose title or id includes the query and navigate to it
-  const performSearch = () => {
-    const q = searchQuery.trim().toLowerCase();
-    setSearchResultMsg('');
-    if (!q) {
-      setSearchResultMsg('Please type something to search.');
-      return;
-    }
-    for (const cat of Object.keys(lessons)) {
-      const found = lessons[cat].find(l => l.title.toLowerCase().includes(q) || l.id.toLowerCase().includes(q));
-      if (found) {
-        const slug = cat.toLowerCase();
-        navigate(`/${slug}/${found.id}`);
-        // no collapse behavior
-        setSearchResultMsg('');
-        return;
-      }
-    }
-    // no match: show inline feedback
-    setSearchResultMsg('No matching lesson found. Try another query.');
-  };
+  // compact premium CSS injected so no new files are required
+  const premiumCss = `
+:root{
+  --accent-1: #7c3aed;
+  --accent-2: #06b6d4;
+  --muted: rgba(255,255,255,0.75);
+  --glass: rgba(255,255,255,0.03);
+  --card-shadow: 0 10px 30px rgba(2,6,23,0.55);
+  --radius-lg: 14px;
+}
 
-  // Wrapper to find lesson by id and pass to LessonPage
-  const LessonRoute = ({ categoryKey }: { categoryKey: 'HTML' | 'CSS' | 'Bootstrap' }) => {
-    const params = useParams();
-    const lessonId = params.lessonId;
-    if (!lessonId) {
-      return <div className="p-4"><h4>Lesson not specified</h4></div>;
-    }
-    const categoryLessons = lessons[categoryKey] || [];
-    const lesson = categoryLessons.find(l => l.id === lessonId);
+/* Grid for category cards — requested template */
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(220px, 1fr));
+  gap: 1.25rem;
+}
+@media (min-width: 992px) {
+  .cards-grid { grid-template-columns: repeat(3, minmax(220px, 1fr)); }
+}
 
-    if (!lesson) {
-      return (
-        <div className="p-4">
-          <h4 className="text-warning">Lesson not found</h4>
-          <p>The requested lesson does not exist in {categoryKey}.</p>
-        </div>
-      );
-    }
+/* Premium hero & cards */
+.hero { padding: 4rem 0; background: linear-gradient(180deg,#071021 0%, #071426 60%); color: #e6eef8; }
+.glass { background: linear-gradient(180deg, var(--glass), rgba(255,255,255,0.015)); border-radius: var(--radius-lg); padding: 2rem; box-shadow: var(--card-shadow); border: 1px solid rgba(255,255,255,0.04); }
+.card-premium { background: rgba(255,255,255,0.02); padding: 1.1rem; border-radius: 12px; box-shadow: 0 8px 24px rgba(2,6,23,0.4); display:flex; flex-direction:column; height:100%; }
+.btn-premium { border-radius: 999px; padding: .6rem 1.1rem; font-weight:600; }
+.badge-letter { width:36px;height:36px;border-radius:10px;background:rgba(255,255,255,0.04); display:flex;align-items:center;justify-content:center;margin-right:12px;font-weight:700; }
 
-    // Pass both the specific lesson and the full list for backward compatibility
-    return <LessonPage category={categoryKey} lessons={categoryLessons} lesson={lesson} />;
-  };
+/* Quiz panel */
+.quiz-panel { border-radius: 14px; overflow: hidden; box-shadow: 0 12px 40px rgba(2,6,23,0.6); }
+.quiz-header { padding: 1rem 1.25rem; background: linear-gradient(90deg,#083344,#04263a); color: #fff; }
+.quiz-body { padding: 1.25rem; background: #fff; color: #0f172a; }
 
-  // Breadcrumb data: tries to extract category and lesson title from path
-  const getBreadcrumb = () => {
-    if (!isLoaded) return null;
-    const path = location.pathname.toLowerCase();
-    const match = path.match(/^\/(html|css|bootstrap)\/([^/]+)/);
-    if (!match) {
-      return { parts: [{ name: 'Home', to: '/' }, { name: selectedCategory || 'HTML', to: '/' }] };
-    }
-    const catKey = match[1] === 'html' ? 'HTML' : match[1] === 'css' ? 'CSS' : 'Bootstrap';
-    const lessonId = match[2];
-    const lesson = (lessons[catKey] || []).find(l => l.id === lessonId);
-    const lessonTitle = lesson ? lesson.title : lessonId;
-    return {
-      parts: [
-        { name: 'Home', to: '/' },
-        { name: catKey, to: '/' },
-        { name: lessonTitle, to: location.pathname }
-      ]
-    };
-  };
+/* Quiz options */
+.quiz-option { border-radius: 12px; padding: 12px 14px; cursor: pointer; transition: transform .15s ease, box-shadow .15s ease; background:#0f172a; color:#e6eef8; display:flex; align-items:center; box-shadow: 0 6px 18px rgba(2,6,23,0.06); }
+.quiz-option:hover { transform: translateY(-4px); box-shadow: 0 12px 30px rgba(2,6,23,0.12); }
+.quiz-option.selected { background:#374151; color:#fff; }
+.quiz-option.correct { background:#16a34a; color:#fff; }
+.quiz-option.wrong { background:#dc2626; color:#fff; }
+.explanation { margin-top:1rem; padding:12px; border-radius:8px; background:#f8fafc; color:#111827; }
 
-  const breadcrumb = getBreadcrumb();
+/* Responsive tweaks */
+@media (max-width:767.98px){
+  .hero { padding:2rem 0; }
+  .cards-grid { grid-template-columns: 1fr; }
+}
+`;
 
   return (
-    <div className="App">
-      {/* fixed, non-collapsing navbar */}
-      <nav className={`navbar ${darkMode ? 'navbar-dark bg-dark' : 'navbar-dark bg-success'} fixed-top`}>
+    <div className={`App ${darkMode ? 'bg-dark text-light' : ''}`} style={{ minHeight: '100vh' }}>
+      {/* inject CSS for premium styling */}
+      <style>{premiumCss}</style>
+
+      {/* Premium responsive navbar */}
+      <nav className={`premium-navbar navbar fixed-top navbar-expand-lg ${darkMode ? 'navbar-dark' : 'navbar-dark'}`}>
         <div className="container-fluid">
-          <Link className="navbar-brand d-flex align-items-center" to="/">
-            <i className="bi bi-code-slash me-2"></i>
-            <span className="d-none d-sm-inline">Web Learning Platform</span>
+          <Link className="navbar-brand d-flex align-items-center text-white" to="/" onClick={(e) => { e.preventDefault(); navigate('/'); }}>
+            <div className="premium-brand-badge">
+              <i className="bi bi-code-slash" />
+            </div>
+            <div className="d-none d-md-block ms-2">
+              <div style={{ fontWeight: 700 }}>Web Learning</div>
+              <small className="text-white-50">Interactive quizzes</small>
+            </div>
           </Link>
 
-          {/* Always-visible controls (no slide/collapse) */}
-          <div className="ms-auto d-flex align-items-center gap-2">
-             <input
-               className="form-control me-2"
-               type="search"
-               placeholder="Search lessons..."
-               aria-label="Search lessons"
-               value={searchQuery}
-               onChange={(e) => setSearchQuery(e.target.value)}
-               onKeyDown={(e) => { if (e.key === 'Enter') performSearch(); }}
-               style={{ minWidth: 200 }}
-             />
-             <button
-               className="btn btn-outline-light"
-               type="button"
-               onClick={performSearch}
-               aria-label="Search"
-             >
-               <i className="bi bi-search"></i>
-             </button>
+          {/* toggler and collapse */}
+          <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav" aria-controls="mainNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span className="navbar-toggler-icon" />
+          </button>
 
-             {/* Theme toggle */}
-             <button
-               className="btn btn-outline-light ms-2"
-               type="button"
-               aria-label="Toggle theme"
-               onClick={() => setDarkMode(d => !d)}
-               title={darkMode ? 'Switch to light mode' : 'Switch to dark mode'}
-             >
-               <i className={`bi ${darkMode ? 'bi-sun-fill' : 'bi-moon-stars-fill'}`}></i>
-             </button>
-          </div>
-         </div>
-       </nav>
-
-      <div className="container-fluid py-3">
-        <div className="row gx-4">
-          <div className="col-12 col-md-3 mb-3">
-            <Sidebar
-              onCategorySelect={handleCategorySelect}
-              onLessonSelect={handleLessonSelect}
-              onQuizSelect={handleQuizSelect}
-              selectedCategory={selectedCategory}
-              lessons={lessons}
-            />
-          </div>
-
-          <div className="col-12 col-md-9">
-            {/* Category tabs + Breadcrumb */}
-            <div className="d-flex justify-content-between align-items-center mb-3">
-              <div className="btn-group btn-group-sm">
-                {Object.keys(lessons).map((cat) => (
+          <div className="collapse navbar-collapse" id="mainNav">
+            <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+              {/* category buttons (desktop) */}
+              {categories.map(cat => (
+                <li className="nav-item d-none d-lg-block" key={cat}>
                   <button
-                    key={cat}
-                    className={`btn ${selectedCategory === cat ? 'btn-success' : 'btn-outline-secondary'}`}
+                    className={`btn btn-sm ${selectedCategory === cat ? 'btn-light text-dark' : 'btn-outline-light'} me-2`}
                     onClick={() => handleCategorySelect(cat)}
                   >
                     {cat}
                   </button>
+                </li>
+              ))}
+              {/* mobile category links */}
+              <li className="nav-item d-lg-none">
+                <div className="nav-link">
+                  {categories.map(cat => (
+                    <button key={cat} className="btn btn-sm btn-outline-light me-2 mb-2" onClick={() => handleCategorySelect(cat)}>{cat}</button>
+                  ))}
+                </div>
+              </li>
+            </ul>
+
+            <div className="d-flex align-items-center gap-2 ms-auto">
+              <div className="d-none d-md-flex align-items-center">
+                {categories.map(cat => (
+                  <button key={`${cat}-quiz`} className="btn btn-sm btn-outline-light me-2" onClick={() => handleQuizSelect(cat.toLowerCase())}>
+                    <i className="bi bi-question-circle me-1"></i>{cat} Quiz
+                  </button>
                 ))}
               </div>
-              {/* small search feedback */}
-              <div aria-live="polite" className={`text-${darkMode ? 'light' : 'muted'} small`}>
-                {searchResultMsg}
-              </div>
+
+              <button
+                className="btn btn-sm btn-outline-light"
+                onClick={() => setDarkMode(d => !d)}
+                title={darkMode ? 'Switch to light mode' : 'Switch to dark mode'}
+              >
+                <i className={`bi ${darkMode ? 'bi-sun-fill' : 'bi-moon-stars-fill'}`}></i>
+              </button>
             </div>
-
-            {/* Breadcrumb */}
-            <div className="mb-3">
-              <nav aria-label="breadcrumb">
-                <ol className="breadcrumb mb-0">
-                  {breadcrumb && breadcrumb.parts.map((p: any, idx: number) => (
-                    <li
-                      key={idx}
-                      className={`breadcrumb-item ${idx === breadcrumb.parts.length - 1 ? 'active' : ''}`}
-                      aria-current={idx === breadcrumb.parts.length - 1 ? 'page' : undefined}
-                    >
-                      {idx === breadcrumb.parts.length - 1 ? (
-                        p.name
-                      ) : (
-                        <Link to={p.to}>{p.name}</Link>
-                      )}
-                    </li>
-                  ))}
-                </ol>
-              </nav>
-            </div>
-
-            {!isLoaded ? (
-              <div className="d-flex justify-content-center align-items-center" style={{ minHeight: '200px' }}>
-                <div className="spinner-border text-success" role="status">
-                  <span className="visually-hidden">Loading...</span>
-                </div>
-              </div>
-            ) : (
-              <div className={`card ${darkMode ? 'bg-secondary text-light' : ''} shadow-sm`}>
-                <div className="card-body" style={{ minHeight: 320 }}>
-                  <ErrorBoundary>
-                    <Routes>
-                      <Route path="/" element={<Home />} />
-                      <Route path="/html/:lessonId" element={<LessonRoute categoryKey="HTML" />} />
-                      <Route path="/css/:lessonId" element={<LessonRoute categoryKey="CSS" />} />
-                      <Route path="/bootstrap/:lessonId" element={<LessonRoute categoryKey="Bootstrap" />} />
-                      <Route path="/quiz/:category" element={<QuizPage />} />
-                      <Route path="*" element={<div className="p-4"><h4>Page not found</h4></div>} />
-                    </Routes>
-                  </ErrorBoundary>
-                </div>
-              </div>
-            )}
-
-            {/* Footer */}
-            <footer className="mt-4 pt-3 border-top">
-              <div className="d-flex justify-content-between align-items-center small text-muted">
-                <div>© {new Date().getFullYear()} Web Learning Platform</div>
-                <div>Made with <i className="bi bi-heart-fill text-danger"></i></div>
-              </div>
-            </footer>
           </div>
         </div>
-      </div>
+      </nav>
 
-      {/* Floating feedback button */}
-      <a
-        href="mailto:feedback@example.com?subject=Web%20Learning%20Platform%20Feedback"
-        className="btn btn-primary shadow-lg"
-        style={{
-          position: 'fixed',
-          right: 18,
-          bottom: 18,
-          borderRadius: '50%',
-          width: 56,
-          height: 56,
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          zIndex: 1050
-        }}
-        aria-label="Send feedback"
-        title="Send feedback"
-      >
-        <i className="bi bi-chat-dots-fill"></i>
-      </a>
+      <main className="container-fluid" style={{ paddingTop: 92 }}>
+        <div className="row justify-content-center gx-4">
+          <div className="col-12">
+            <ErrorBoundary>
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/html/:lessonId" element={<LessonPage category="HTML" lessons={lessons.HTML || []} />} />
+                <Route path="/css/:lessonId" element={<LessonPage category="CSS" lessons={lessons.CSS || []} />} />
+                <Route path="/bootstrap/:lessonId" element={<LessonPage category="Bootstrap" lessons={lessons.Bootstrap || []} />} />
+                <Route path="/quiz/:category" element={<QuizPage />} />
+                <Route path="*" element={<div className="p-4"><h4>Page not found</h4></div>} />
+              </Routes>
+            </ErrorBoundary>
+          </div>
+        </div>
+      </main>
     </div>
   );
 }
 
-function App() {
+export default function App() {
   return (
     <Router>
       <AppContent />
     </Router>
   );
 }
-
-export default App;

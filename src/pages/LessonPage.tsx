@@ -12,7 +12,7 @@ interface Lesson {
 
 interface LessonPageProps {
   category: string;
-  lessons?: Lesson[];
+  lessons?: Lesson[]; // may be provided by App
   lesson?: Lesson | null;
 }
 
@@ -29,10 +29,26 @@ const LessonPage: React.FC<LessonPageProps> = ({ category, lessons: passedLesson
       return;
     }
 
+    // if parent passed a lessons array, try to find the lesson there first
+    if (passedLessons && lessonId) {
+      const found = passedLessons.find(l => l.id === lessonId);
+      if (found) {
+        setLesson(found);
+        setLoading(false);
+        setError(null);
+        return;
+      }
+    }
+
     const loadLesson = async () => {
       setLoading(true);
       setError(null);
       try {
+        if (!lessonId) {
+          setError('Lesson id missing');
+          setLesson(null);
+          return;
+        }
         // dynamic import from src/data
         const mod = await import(`../data/${category.toLowerCase()}-basics.json`);
         const lessonsList: Lesson[] = mod.default || mod;
@@ -48,7 +64,7 @@ const LessonPage: React.FC<LessonPageProps> = ({ category, lessons: passedLesson
     };
 
     loadLesson();
-  }, [lessonId, category, initialLesson]);
+  }, [lessonId, category, initialLesson, passedLessons]);
 
   if (loading) {
     return <div className="container mt-4 text-center"><div className="spinner-border text-primary" role="status" /></div>;

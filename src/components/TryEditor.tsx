@@ -9,13 +9,23 @@ interface TryEditorProps {
 const TryEditor: React.FC<TryEditorProps> = ({ initialCode, lessonId }) => {
   const [code, setCode] = useState(initialCode);
   const [statusMsg, setStatusMsg] = useState<string>('');
+  const [previewHtml, setPreviewHtml] = useState<string>(''); // NEW
   const iframeRef = useRef<HTMLIFrameElement>(null);
+  const [iframeKey, setIframeKey] = useState<number>(0); // force remount when needed
 
   useEffect(() => {
     setCode(initialCode);
   }, [initialCode]);
 
+  const isFullHtml = (text: string) => {
+    const t = text.trim().toLowerCase();
+    return t.includes('<!doctype') || t.includes('<html') || t.includes('<body');
+  };
+
   const buildHtml = (userCode: string) => {
+    // if the user provided a full HTML document, use it as-is
+    if (isFullHtml(userCode)) return userCode;
+
     if (lessonId?.startsWith('bootstrap-')) {
       return `<!doctype html>
 <html>
@@ -42,25 +52,47 @@ const TryEditor: React.FC<TryEditorProps> = ({ initialCode, lessonId }) => {
   <p class="demo">Sample paragraph</p>
 </body>
 </html>`;
-    }
-    return `<!doctype html>
+    } else {
+      // default: wrap snippet into a minimal HTML document
+      return `<!doctype html>
 <html>
 <head><meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/></head>
 <body>${userCode}</body>
 </html>`;
+    }
+  };
+
+  const setIframeContentFallback = (html: string) => {
+    const iframe = iframeRef.current;
+    if (!iframe) return;
+    try {
+      if (iframe.contentWindow && iframe.contentWindow.document) {
+        const doc = iframe.contentWindow.document;
+        doc.open();
+        doc.write(html);
+        doc.close();
+      } else {
+        // leave to effect that sets src from data URL
+      }
+    } catch {
+      // silent fallback; data URL effect will handle rendering
+    }
   };
 
   const runCode = () => {
     try {
       setStatusMsg('');
       const html = buildHtml(code);
-      if (!iframeRef.current) return;
-      iframeRef.current.srcdoc = html;
+      // set previewHtml -> used as iframe srcDoc (preferred)
+      setPreviewHtml(html);
+      // also attempt fallback after short delay (covers older browsers)
+      setTimeout(() => setIframeContentFallback(html), 30);
       setStatusMsg('Rendered successfully');
-      setTimeout(() => setStatusMsg(''), 2000);
+      setTimeout(() => setStatusMsg(''), 1800);
     } catch (err) {
       console.error(err);
       setStatusMsg('Error rendering preview.');
+      setTimeout(() => setStatusMsg(''), 1800);
     }
   };
 
@@ -76,7 +108,7 @@ const TryEditor: React.FC<TryEditorProps> = ({ initialCode, lessonId }) => {
   };
 
   const downloadCode = () => {
-    const blob = new Blob([code], { type: 'text/plain' });
+    const blob = new Blob([code], { type: 'text/html' });
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
@@ -89,9 +121,14 @@ const TryEditor: React.FC<TryEditorProps> = ({ initialCode, lessonId }) => {
     setTimeout(() => setStatusMsg(''), 1500);
   };
 
-  // auto render when initialCode changes (or on mount)
+  // auto render when initialCode changes (or on mount). small delay helps ensure iframe mounted
   useEffect(() => {
-    runCode();
+    const id = window.setTimeout(() => {
+      const html = buildHtml(initialCode);
+      setPreviewHtml(html); // ensure previewHtml set on mount/change
+      setIframeContentFallback(html);
+    }, 50);
+    return () => window.clearTimeout(id);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [initialCode]);
 
@@ -131,8 +168,10 @@ const TryEditor: React.FC<TryEditorProps> = ({ initialCode, lessonId }) => {
             <small className="text-muted">Sandboxed iframe</small>
           </div>
           <div className="flex-grow-1">
+            {/* prefer srcDoc prop for reliable rendering; keep ref for fallback writes */}
             <iframe
               ref={iframeRef}
+              srcDoc={previewHtml}
               className="border rounded w-100"
               style={{ height: 320, minHeight: 240 }}
               title="Preview"

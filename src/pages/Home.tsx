@@ -1,63 +1,66 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 
 const Home: React.FC = () => {
+  const categories = [
+    { key: 'html', title: 'HTML Basics', icon: 'bi bi-code-square', desc: 'Structure the web with semantic HTML.' },
+    { key: 'css', title: 'CSS Styling', icon: 'bi bi-palette', desc: 'Create beautiful, responsive layouts.' },
+    { key: 'bootstrap', title: 'Bootstrap', icon: 'bi bi-bootstrap', desc: 'Fast prototypes with Bootstrap components.' },
+  ];
+
   return (
-    <div className="container-fluid py-5">
-      <div className="row justify-content-center">
-        <div className="col-lg-10">
-          <div className="p-5 rounded shadow-lg text-center" style={{ background: 'linear-gradient(180deg,#e6fff0,#f8fff8)' }}>
-            <h1 className="display-4 text-success mb-3">
-              <i className="bi bi-mortarboard-fill me-3"></i>
-              Web Learning Platform
-            </h1>
-            <p className="lead text-muted mb-4">Premium interactive lessons and quizzes for HTML, CSS and Bootstrap — learn by doing.</p>
-
-            <div className="d-flex justify-content-center gap-3">
-              <a className="btn btn-success btn-lg" href="/" onClick={(e) => e.preventDefault()}>
-                <i className="bi bi-play-btn me-2"></i>Get Started
-              </a>
-              <a className="btn btn-outline-success btn-lg" href="/" onClick={(e) => e.preventDefault()}>
-                <i className="bi bi-journal-text me-2"></i>Browse Lessons
-              </a>
-            </div>
-          </div>
-
-          <div className="row g-4 mt-5">
-            <div className="col-md-4">
-              <div className="card h-100 shadow-sm border-0">
-                <div className="card-body text-center">
-                  <i className="bi bi-code-square text-success" style={{ fontSize: '3rem' }}></i>
-                  <h5 className="card-title mt-3">HTML Basics</h5>
-                  <p className="card-text text-muted">Structure the web with semantic HTML.</p>
+    <div className="hero">
+      <div className="container">
+        <div className="row justify-content-center mb-4">
+          <div className="col-lg-10">
+            <div className="glass">
+              <div className="d-flex flex-column-reverse flex-md-row align-items-center gap-4">
+                <div style={{ flex: 1 }}>
+                  <h1 className="display-4 fw-bold text-white mb-2">Master Web Skills — Interactive Quizzes</h1>
+                  <p className="lead text-white-50 mb-3">Curated quizzes and live try-it editors to sharpen your HTML, CSS and Bootstrap skills.</p>
+                  <div className="d-flex gap-2 flex-wrap">
+                    <Link to="/quiz/html" className="btn btn-warning btn-lg btn-premium text-dark shadow-sm">Start HTML</Link>
+                    <Link to="/quiz/css" className="btn btn-lg btn-outline-light btn-premium shadow-sm">Start CSS</Link>
+                  </div>
                 </div>
-              </div>
-            </div>
-            <div className="col-md-4">
-              <div className="card h-100 shadow-sm border-0">
-                <div className="card-body text-center">
-                  <i className="bi bi-palette text-success" style={{ fontSize: '3rem' }}></i>
-                  <h5 className="card-title mt-3">CSS Styling</h5>
-                  <p className="card-text text-muted">Create beautiful, responsive layouts.</p>
-                </div>
-              </div>
-            </div>
-            <div className="col-md-4">
-              <div className="card h-100 shadow-sm border-0">
-                <div className="card-body text-center">
-                  <i className="bi bi-bootstrap text-success" style={{ fontSize: '3rem' }}></i>
-                  <h5 className="card-title mt-3">Bootstrap Framework</h5>
-                  <p className="card-text text-muted">Fast prototypes with Bootstrap components.</p>
+
+                <div style={{ minWidth: 220, textAlign: 'center' }}>
+                  <div style={{ fontSize: 96, color: 'rgba(255,215,0,0.12)' }}>
+                    <i className="bi bi-code-slash"></i>
+                  </div>
+                  <div className="text-white-50 small mt-2">Practice · Learn · Repeat</div>
                 </div>
               </div>
             </div>
           </div>
+        </div>
 
-          <div className="text-center mt-5">
-            <div className="alert alert-success shadow-sm" role="alert">
-              <i className="bi bi-lightbulb me-2"></i>
-              <strong>Pro tip:</strong> Use the Try it editor to experiment with code in real time.
-            </div>
+        {/* Use the requested grid template here */}
+        <div className="container">
+          <div className="cards-grid">
+            {categories.map(cat => (
+              <div key={cat.key}>
+                <div className="card-premium">
+                  <div className="d-flex align-items-center mb-3">
+                    <i className={`${cat.icon} text-warning`} style={{ fontSize: 28 }} />
+                    <h5 className="mb-0 ms-3 text-white">{cat.title}</h5>
+                  </div>
+                  <p className="text-white-50 mb-4">{cat.desc}</p>
+                  <div className="mt-auto d-flex gap-2">
+                    <Link to={`/quiz/${cat.key}`} className="btn btn-ghost btn-premium">Choose Level</Link>
+                    <Link to={`/quiz/${cat.key}`} className="btn btn-warning btn-premium text-dark">Quick Start</Link>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div className="text-center mt-5">
+          <div className="badge bg-transparent text-white-50" style={{ padding: '0.8rem 1.4rem', borderRadius: 999 }}>
+            <i className="bi bi-lightbulb-fill text-warning me-2"></i>
+            <strong>Pro tip:</strong> Try the "Choose Level" to pick difficulty and track progress.
           </div>
         </div>
       </div>
