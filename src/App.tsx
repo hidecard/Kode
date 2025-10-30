@@ -132,15 +132,15 @@ function AppContent() {
       <style>{premiumCss}</style>
 
       {/* Premium responsive navbar */}
-      <nav className="premium-navbar navbar fixed-top navbar-expand-lg navbar-dark">
+      <nav className="premium-navbar navbar fixed-top navbar-expand-lg navbar-light bg-white">
         <div className="container-fluid">
-          <Link className="navbar-brand d-flex align-items-center text-white" to="/" onClick={(e) => { e.preventDefault(); navigate('/'); }}>
+          <Link className="navbar-brand d-flex align-items-center text-dark" to="/" onClick={(e) => { e.preventDefault(); navigate('/'); }}>
             <div className="premium-brand-badge">
               <i className="bi bi-code-slash" />
             </div>
             <div className="d-none d-md-block ms-2">
               <div style={{ fontWeight: 700 }}>Web Learning</div>
-              <small className="text-white-50">Interactive quizzes</small>
+              <small className="text-muted">Interactive quizzes</small>
             </div>
           </Link>
 
@@ -155,7 +155,7 @@ function AppContent() {
               {categories.map(cat => (
                 <li className="nav-item d-none d-lg-block" key={cat}>
                   <button
-                    className={`btn btn-sm ${selectedCategory === cat ? 'btn-warning text-dark' : 'btn-ghost'} me-2`}
+                    className={`btn btn-sm ${selectedCategory === cat ? 'btn-warning text-dark' : 'btn-outline-dark'} me-2`}
                     onClick={() => handleCategorySelect(cat)}
                   >
                     {cat}
@@ -166,7 +166,7 @@ function AppContent() {
               <li className="nav-item d-lg-none">
                 <div className="nav-link">
                   {categories.map(cat => (
-                    <button key={cat} className="btn btn-sm btn-ghost me-2 mb-2" onClick={() => handleCategorySelect(cat)}>{cat}</button>
+                    <button key={cat} className="btn btn-sm btn-outline-dark me-2 mb-2" onClick={() => handleCategorySelect(cat)}>{cat}</button>
                   ))}
                 </div>
               </li>

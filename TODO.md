@@ -63,13 +63,13 @@
 
 The application now features a cohesive, modern premium design that enhances user engagement while maintaining excellent usability and performance.
 
-## 📋 Current Task: Update LessonPage UI to Match Home Page Design
-- [x] Modify LessonPage.tsx to apply light theme styling (bg-white text-dark) to the entire card for consistency with Home page
-- [x] Update text colors to text-muted for better contrast on light background
-- [x] Change buttons to btn-outline-dark for consistency with Home page styling
-- [x] Update card header styling to match Home page design
-- [ ] Test the LessonPage to ensure it matches Home page visual design
-- [ ] Verify the TryEditor component remains functional
+## 📋 Current Task: Remove Restart Level Button and Update Navbar Style
+- [x] Remove the "Restart level" button from QuizPage.tsx
+- [x] Update navbar styling to match the new light theme design
+- [x] Change navbar background to light theme with dark text
+- [x] Update navbar buttons to use btn-outline-dark styling
+- [ ] Test the navbar changes across all pages
+- [ ] Verify quiz functionality remains intact after removing restart button
 
 ## 📋 Next Steps (Optional Enhancements)
 - [ ] Add more interactive animations

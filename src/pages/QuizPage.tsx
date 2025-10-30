@@ -237,11 +237,7 @@ const QuizPage: React.FC = () => {
                       <small className="text-muted">Category: {(key || 'HTML').toUpperCase()} — Level: {level}</small>
                     </div>
                     <div>
-                      <button className="btn btn-sm btn-outline-light me-2" onClick={() => setLevel(null)}>Change level</button>
-                      <button className="btn btn-sm btn-secondary" onClick={() => {
-                        // re-render same level (no-op)
-                        setLevel(prev => prev ? prev : null);
-                      }}>Restart level</button>
+                      <button className="btn btn-sm btn-outline-light" onClick={() => setLevel(null)}>Change level</button>
                     </div>
                   </div>
 
