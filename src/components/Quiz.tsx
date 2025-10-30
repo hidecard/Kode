@@ -57,7 +57,7 @@ const Quiz: React.FC<QuizProps> = ({ quizData }) => {
     return (
       <div className="text-center">
         <h3 className="mb-3">{quizData.quizTitle}</h3>
-        <div className="display-5 text-warning mb-2" style={{ fontWeight: 700 }}>{score} / {total}</div>
+        <div className="display-5 text-primary mb-2" style={{ fontWeight: 700 }}>{score} / {total}</div>
         <p className="text-muted mb-3">You scored {Math.round((score / total) * 100)}%</p>
         <div className="d-flex justify-content-center gap-2">
           <button className="btn btn-outline-primary" onClick={retake}><i className="bi bi-arrow-repeat me-1"></i>Retake</button>
@@ -75,7 +75,7 @@ const Quiz: React.FC<QuizProps> = ({ quizData }) => {
       </div>
 
       <div className="progress mb-3" style={{ height: 12, background: '#e9ecef' }}>
-        <div className="progress-bar bg-warning" role="progressbar" style={{ width: `${Math.round(((current) / total) * 100)}%`, transition: 'width .4s ease' }} />
+        <div className="progress-bar bg-primary" role="progressbar" style={{ width: `${Math.round(((current) / total) * 100)}%`, transition: 'width .4s ease' }} />
       </div>
 
       <div className="card mb-3" style={{ borderRadius: 12 }}>
@@ -111,16 +111,16 @@ const Quiz: React.FC<QuizProps> = ({ quizData }) => {
             })}
           </div>
 
-          {showAnswer && q.explanation && (
+          {showAnswer && (
             <div className="explanation">
               <strong>Explanation:</strong>
-              <div className="text-muted mt-1">{q.explanation}</div>
+              <div className="text-muted mt-1">{q.explanation || 'No explanation available for this question.'}</div>
             </div>
           )}
 
           <div className="mt-4 d-flex">
             {!showAnswer ? (
-              <button className="btn btn-warning" onClick={submitAnswer} disabled={selected === null}><i className="bi bi-check-lg me-1"></i>Check</button>
+              <button className="btn btn-primary" onClick={submitAnswer} disabled={selected === null}><i className="bi bi-check-lg me-1"></i>Check</button>
             ) : (
               <button className="btn btn-outline-secondary" onClick={next}><i className="bi bi-chevron-right me-1"></i>{current < total - 1 ? 'Next' : 'Finish'}</button>
             )}

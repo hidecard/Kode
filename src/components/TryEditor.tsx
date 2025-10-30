@@ -11,7 +11,7 @@ const TryEditor: React.FC<TryEditorProps> = ({ initialCode, lessonId }) => {
   const [statusMsg, setStatusMsg] = useState<string>('');
   const [previewHtml, setPreviewHtml] = useState<string>(''); // NEW
   const iframeRef = useRef<HTMLIFrameElement>(null);
-  const [iframeKey, setIframeKey] = useState<number>(0); // force remount when needed
+
 
   useEffect(() => {
     setCode(initialCode);
@@ -143,20 +143,20 @@ const TryEditor: React.FC<TryEditorProps> = ({ initialCode, lessonId }) => {
             rows={16}
             value={code}
             onChange={(e) => setCode(e.target.value)}
-            style={{ minHeight: 320 }}
+            style={{ minHeight: 320, backgroundColor: '#ffffff', color: '#495057', borderColor: '#dee2e6' }}
             aria-label="Code editor"
           />
           <div className="d-flex gap-2 mt-2">
-            <button className="btn btn-success" onClick={runCode} aria-label="Run code">
+            <button className="btn" style={{ backgroundColor: '#28a745', borderColor: '#28a745', color: '#ffffff' }} onClick={runCode} aria-label="Run code">
               <i className="bi bi-play-fill me-1" /> Run
             </button>
-            <button className="btn btn-outline-secondary" onClick={copyCode} aria-label="Copy code">
+            <button className="btn" style={{ borderColor: '#6c757d', color: '#6c757d' }} onClick={copyCode} aria-label="Copy code">
               <i className="bi bi-clipboard me-1" /> Copy
             </button>
-            <button className="btn btn-outline-primary" onClick={downloadCode} aria-label="Download code">
+            <button className="btn" style={{ borderColor: '#007bff', color: '#007bff' }} onClick={downloadCode} aria-label="Download code">
               <i className="bi bi-download me-1" /> Download
             </button>
-            <div className="ms-auto align-self-center small text-muted" aria-live="polite">
+            <div className="ms-auto align-self-center small" style={{ color: '#6c757d' }} aria-live="polite">
               {statusMsg}
             </div>
           </div>
@@ -164,8 +164,8 @@ const TryEditor: React.FC<TryEditorProps> = ({ initialCode, lessonId }) => {
 
         <div className="col-12 col-md-6 d-flex flex-column">
           <div className="d-flex justify-content-between align-items-center mb-2">
-            <strong className="small mb-0">Preview</strong>
-            <small className="text-muted">Sandboxed iframe</small>
+            <strong className="small mb-0" style={{ color: '#495057' }}>Preview</strong>
+            <small style={{ color: '#6c757d' }}>Sandboxed iframe</small>
           </div>
           <div className="flex-grow-1">
             {/* prefer srcDoc prop for reliable rendering; keep ref for fallback writes */}
@@ -173,7 +173,7 @@ const TryEditor: React.FC<TryEditorProps> = ({ initialCode, lessonId }) => {
               ref={iframeRef}
               srcDoc={previewHtml}
               className="border rounded w-100"
-              style={{ height: 320, minHeight: 240 }}
+              style={{ height: 320, minHeight: 240, borderColor: '#dee2e6' }}
               title="Preview"
               sandbox="allow-scripts allow-same-origin"
             />

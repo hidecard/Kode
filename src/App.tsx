@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+                      import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, useNavigate, useLocation, Link } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
@@ -48,7 +48,7 @@ function AppContent() {
   const location = useLocation();
   const [selectedCategory, setSelectedCategory] = useState<string>('HTML');
   const [lessons, setLessons] = useState<{ [key: string]: Lesson[] }>({});
-  const [darkMode, setDarkMode] = useState<boolean>(false);
+
 
   useEffect(() => {
     const loadedLessons: { [key: string]: Lesson[] } = {
@@ -71,25 +71,11 @@ function AppContent() {
     navigate(`/quiz/${category.toLowerCase()}`);
   };
 
-  const handleLessonSelect = (lessonId: string) => {
-    let category = selectedCategory;
-    if (!category) {
-      for (const cat of Object.keys(lessons)) {
-        if (lessons[cat].some(l => l.id === lessonId)) {
-          category = cat;
-          break;
-        }
-      }
-    }
-    const categorySlug = (category || 'HTML').toLowerCase();
-    navigate(`/${categorySlug}/${lessonId}`);
-  };
 
-  const handleQuizSelect = (category: string) => {
-    navigate(`/quiz/${category}`);
-  };
 
-  const isLoaded = Object.keys(lessons).length > 0;
+
+
+
   const categories = ['HTML', 'CSS', 'Bootstrap'];
 
   // compact premium CSS injected so no new files are required
@@ -141,12 +127,12 @@ function AppContent() {
 `;
 
   return (
-    <div className={`App ${darkMode ? 'bg-dark text-light' : ''}`} style={{ minHeight: '100vh' }}>
+    <div className="App" style={{ minHeight: '100vh' }}>
       {/* inject CSS for premium styling */}
       <style>{premiumCss}</style>
 
       {/* Premium responsive navbar */}
-      <nav className={`premium-navbar navbar fixed-top navbar-expand-lg ${darkMode ? 'navbar-dark' : 'navbar-dark'}`}>
+      <nav className="premium-navbar navbar fixed-top navbar-expand-lg navbar-dark">
         <div className="container-fluid">
           <Link className="navbar-brand d-flex align-items-center text-white" to="/" onClick={(e) => { e.preventDefault(); navigate('/'); }}>
             <div className="premium-brand-badge">
@@ -169,7 +155,7 @@ function AppContent() {
               {categories.map(cat => (
                 <li className="nav-item d-none d-lg-block" key={cat}>
                   <button
-                    className={`btn btn-sm ${selectedCategory === cat ? 'btn-light text-dark' : 'btn-outline-light'} me-2`}
+                    className={`btn btn-sm ${selectedCategory === cat ? 'btn-warning text-dark' : 'btn-ghost'} me-2`}
                     onClick={() => handleCategorySelect(cat)}
                   >
                     {cat}
@@ -180,28 +166,13 @@ function AppContent() {
               <li className="nav-item d-lg-none">
                 <div className="nav-link">
                   {categories.map(cat => (
-                    <button key={cat} className="btn btn-sm btn-outline-light me-2 mb-2" onClick={() => handleCategorySelect(cat)}>{cat}</button>
+                    <button key={cat} className="btn btn-sm btn-ghost me-2 mb-2" onClick={() => handleCategorySelect(cat)}>{cat}</button>
                   ))}
                 </div>
               </li>
             </ul>
 
             <div className="d-flex align-items-center gap-2 ms-auto">
-              <div className="d-none d-md-flex align-items-center">
-                {categories.map(cat => (
-                  <button key={`${cat}-quiz`} className="btn btn-sm btn-outline-light me-2" onClick={() => handleQuizSelect(cat.toLowerCase())}>
-                    <i className="bi bi-question-circle me-1"></i>{cat} Quiz
-                  </button>
-                ))}
-              </div>
-
-              <button
-                className="btn btn-sm btn-outline-light"
-                onClick={() => setDarkMode(d => !d)}
-                title={darkMode ? 'Switch to light mode' : 'Switch to dark mode'}
-              >
-                <i className={`bi ${darkMode ? 'bi-sun-fill' : 'bi-moon-stars-fill'}`}></i>
-              </button>
             </div>
           </div>
         </div>
