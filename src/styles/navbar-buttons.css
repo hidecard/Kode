@@ -1,0 +1,35 @@
+/* Navbar button styles */
+.navbar .btn {
+  border-radius: 25px;
+  padding: 0.5rem 1rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.navbar .btn-premium {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border: none;
+  color: white;
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+}
+
+.navbar .btn-premium:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+  color: white;
+}
+
+.navbar .btn-ghost {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(10px);
+}
+
+.navbar .btn-ghost:hover {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.4);
+  color: white;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(255, 255, 255, 0.1);
+}

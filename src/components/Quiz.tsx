@@ -78,7 +78,7 @@ const Quiz: React.FC<QuizProps> = ({ quizData }) => {
         <div className="progress-bar bg-primary" role="progressbar" style={{ width: `${Math.round(((current) / total) * 100)}%`, transition: 'width .4s ease' }} />
       </div>
 
-      <div className="card mb-3" style={{ borderRadius: 12 }}>
+      <div className="card-premium mb-3">
         <div className="card-body">
           <p className="mb-4 lead"><strong>{q.question}</strong></p>
 

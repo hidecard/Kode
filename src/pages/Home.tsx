@@ -13,7 +13,7 @@ const Home: React.FC = () => {
     <div className="container-fluid mt-4">
       <div className="row justify-content-center">
         <div className="col-lg-10">
-          <div className="card bg-white text-dark shadow-sm">
+          <div className="card-premium">
             <div className="card-body">
               <div className="row justify-content-center mb-5">
                 <div className="col-lg-10">

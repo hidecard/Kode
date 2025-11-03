@@ -56,7 +56,7 @@ const QUESTION_BANK: { [cat: string]: { [level: string]: Question[] } } = {
       { question: 'Which of the following is not a HTML5 tag?', options: ['<track>','<video>','<slider>','<source>'], correct: 2, explanation: '<video> tag is used to display video clips in HTML5. Multiple media resources for media elements is specified by <source> tag. Text track for media elements i.e. <audio> & <video> is provided by <track> tag in HTML5. There is no such thing as slider tag in HTML5.' },
       { question: 'Which of the following elements in HTML5 defines video or movie content?', options: ['<video>','<movie>','<audio>','<media>'], correct: 0, explanation: 'The media to which linked document is optimized is given by <media> tag. Before HTML5, videos could only be played with a plug-in (like flash). The HTML5 video element specifies a standard way to embed a video in a webpage. As like <video> elements, <audio> element contains additional files or streams like music, recording, etc.' },
       { question: 'Which of the following is not the element associated with the HTML table layout?', options: ['alignment','color','size','spanning'], correct: 1, explanation: 'There are three elements in HTML table layout i.e. size, spanning and alignment. Layout type can be achieved by setting Rows elements layout attribute to Fixed or Auto. Auto attribute relies on browser compatibility whereas fixed layout relies on developer specification.' },
-      { question: 'Which element is used for or styling HTML5 layout?', options: ['CSS','jQuery','JavaScript','PHP'], correct: 0, explanation: 'For styling HTML5, CSS i.e Cascading Style Sheet is used. It is style sheet language and designed to describe presentation of its content including layouts, colors and fonts. CSS can control the layout of multiple webpages.' },
+      { question: 'Which element is used for or styling HTML5 layout?', options: ['CSS','jQuery','HTML','PHP'], correct: 0, explanation: 'For styling HTML5, CSS i.e Cascading Style Sheet is used. It is style sheet language and designed to describe presentation of its content including layouts, colors and fonts. CSS can control the layout of multiple webpages.' },
       { question: 'Which of the following HTML code will make an image clickable?', options: ['<a href=\"https://www.sanfoundry.com/\">Sanfoundry Home Page</a>','<img src=\"https://www.sanfoundry.com/sanfoundry-logo\"><a href=\"https://www.sanfoundry.com/\">Sanfoundry  Home Page</a></img>','<a href=\"https://www.sanfoundry.com/\">Sanfoundry Home Page</a><img src=\"https://www.sanfoundry.com/sanfoundry-logo\" />','<a href=\"https://www.sanfoundry.com/\"><img src=\"https://www.sanfoundry.com/sanfoundry-logo\" /></a>'], correct: 3, explanation: '<a> tag defines a hyperlink, which is used to link from one page to another page. Suppose if we want an image to be clickable then it should go inside <a> Tag.' },
       { question: 'In HTML, which attribute is used to create a link that opens in a new window tab?', options: ['src=”_blank”','alt=”_blank”','target=”_self”','target=”_blank”'], correct: 3, explanation: 'Add the target=”_blank” attribute in the Anchor tag. target=”_blank” attribute makes a link open in a new window tab.' },
       { question: 'Which HTML element is used for short quote?', options: ['<em>','<abbr>','<q>','<blockquote>'], correct: 2, explanation: '<em> element indicates emphasis, browser will show the contents of <em> element in italic. A section which is quoted from another source is specified by <blockquote>. The <abbr> defines abbreviation. We used <q> element for shorter quote. Browser put quote around <q> element.' },
@@ -88,7 +88,7 @@ const QUESTION_BANK: { [cat: string]: { [level: string]: Question[] } } = {
       { question: 'Which of the following tag is used to embed css in html page?', options: ['<css>','<!DOCTYPE html>','<script>','<style>'], correct: 3, explanation: '<style> </style> tag is used to embed CSS in HTML page, while <script> </script> is used to embed JS in HTML. <!DOCTYPE html> is HTML5 declaration.' },
       { question: 'Which of the following CSS selectors are used to specify a group of elements?', options: ['tag','id','class','both class and tag'], correct: 2, explanation: 'Class selectors are used to specify a group of elements. Id selector specifies a particular unique element.' },
       { question: 'Which of the following has introduced text, list, box, margin, border, color, and background properties?', options: ['HTML','PHP','CSS','Ajax'], correct: 2, explanation: 'CSS is a style sheet language that stands for Cascading Style Sheet. CSS has introduced text, list, box, margin, border, color, and background properties.' },
-      { question: 'Which of the following CSS framework is used to create a responsive design?', options: ['django','rails','larawell','bootstrap'], correct: 3, explanation: 'Bootstrap is a free and open-source collection of tools for creating websites and web applications. It contains HTML- and CSS-based design templates for typography, forms, buttons, navigation and other interface components, as well as optional JavaScript extensions. It aims to ease the development of dynamic websites and web applications.' },
+      { question: 'Which of the following CSS framework is used to create a responsive design?', options: ['django','rails','larawell','bootstrap'], correct: 3, explanation: 'Bootstrap is a free and open-source collection of tools for creating websites and web applications. It contains HTML- and CSS-based design templates for typography, forms, buttons, navigation and other interface components, as well as optional HTML extensions. It aims to ease the development of dynamic websites and web applications.' },
       { question: 'Which of the following CSS selector is used to specify a rule to bind a particular unique element?', options: ['tag','id','class','both class and tag'], correct: 1, explanation: 'For binding a particular unique element, id selectors are used. While for a group of elements, class selector can be used.' },
       { question: 'Which of the following type of HTML tag is used to define an internal style sheet?', options: ['<script>','<link>','<class>','<style>'], correct: 3, explanation: '<style> tag is used to define an internal style sheet in HTML document.' },
       { question: 'Which of the following CSS property is used to make the text bold?', options: ['text-decoration: bold','font-weight: bold','font-style: bold','text-align: bold'], correct: 1, explanation: 'The font-weight property is used for setting the thickness and boldness of the font. It is used to define the weight of the text. The available weight depends on the font-family, which is used by the browser.' },
@@ -144,7 +144,7 @@ const QUESTION_BANK: { [cat: string]: { [level: string]: Question[] } } = {
       { question: 'Which class makes an image responsive?', options: ['img-fluid','img-responsive','responsive-img','img-fluid-sm'], correct: 0, explanation: 'The img-fluid class makes an image responsive.' },
       { question: 'How do you create a row in Bootstrap?', options: ['<div class="row">','<row>','<div class="grid">','<div class="container-row">'], correct: 0, explanation: 'A row is created with <div class="row">.' },
       { question: 'Which container is full-width?', options: ['container-fluid','container','container-md','container-sm'], correct: 0, explanation: 'The container-fluid class is full-width.' },
-      { question: 'What is Bootstrap?', options: ['A JavaScript framework for back-end development','A CSS framework for designing responsive web pages','A database management system','A command-line interface tool'], correct: 1, explanation: 'Bootstrap is a popular front-end CSS framework that simplifies the creation of responsive and mobile-first web pages. It includes pre-designed templates and components for typography, buttons, navigation bars, modals, and more.' },
+      { question: 'What is Bootstrap?', options: ['A HTML framework for back-end development','A CSS framework for designing responsive web pages','A database management system','A command-line interface tool'], correct: 1, explanation: 'Bootstrap is a popular front-end CSS framework that simplifies the creation of responsive and mobile-first web pages. It includes pre-designed templates and components for typography, buttons, navigation bars, modals, and more.' },
       { question: 'Which class in Bootstrap makes an image responsive by scaling it within its container?', options: ['img-thumbnail','img-scale','img-fluid','img-circle'], correct: 2, explanation: 'The .img-fluid class ensures images scale properly and adjust to fit their container. It applies max-width: 100% and height: auto.' },
       { question: 'Which of the following class in Bootstrap is used to provide a responsive fixed width container?', options: ['.container-fixed','.container-fluid','.container','All of the mentioned'], correct: 2, explanation: 'A container is used in Bootstrap to specify the content’s margins that deal with your layout’s responsive characteristics. To generate enclosed content, use the .container class.' },
       { question: 'Which of the following class in Bootstrap is used to create a dropdown menu?', options: ['.dropdown','.select','.select-list','None of the mentioned'], correct: 0, explanation: 'A dropdown menu is indicated by the .dropdown class. Use a button or a link with the class of .data-toggle=”dropdown” attribute and the .dropdown-toggle attribute to open the dropdown menu. The .caret class adds a caret arrow icon () to the button, indicating that it’s a dropdown.' },
@@ -159,7 +159,7 @@ const QUESTION_BANK: { [cat: string]: { [level: string]: Question[] } } = {
     intermediate: [
       { question: 'Which Bootstrap utility class adds margin-top of 3?', options: ['mt-3','mb-3','p-3','m-3'], correct: 0, explanation: 'The mt-3 class adds margin-top of 3 units.' },
       { question: 'What does .d-none do?', options: ['Hides an element','Displays element as block','Makes element inline','Shows element as flex'], correct: 0, explanation: 'The .d-none class hides an element.' },
-      { question: 'Which data attribute toggles a modal via JavaScript?', options: ['data-bs-toggle="modal"','data-toggle="modal"','data-modal="true"','data-bs-modal="true"'], correct: 0, explanation: 'The data-bs-toggle="modal" attribute toggles a modal.' },
+      { question: 'Which data attribute toggles a modal via HTML?', options: ['data-bs-toggle="modal"','data-toggle="modal"','data-modal="true"','data-bs-modal="true"'], correct: 0, explanation: 'The data-bs-toggle="modal" attribute toggles a modal.' },
       { question: 'Which class aligns items vertically in a flex container?', options: ['align-items-center','justify-content-center','text-center','align-self-center'], correct: 0, explanation: 'The align-items-center class aligns items vertically in the center.' },
       { question: 'Which class is used to create a responsive navigation bar in Bootstrap?', options: ['navbar-fixed','navbar-expand','navbar-light','navbar-collapse'], correct: 1, explanation: 'The .navbar-expand class makes the navigation bar responsive by enabling it to collapse on smaller screens and expand on larger ones.' },
       { question: 'Which plugin is used to cycle through elements, like a slideshow?', options: ['Carousel Plugin','Modal Plugin','Tooltip Plugin','None of the mentioned'], correct: 0, explanation: 'Carousel Plugin is used to cycle through elements, like a slideshow.' },
@@ -167,7 +167,7 @@ const QUESTION_BANK: { [cat: string]: { [level: string]: Question[] } } = {
       { question: 'Which Bootstrap class is used to create a green background in a table row?', options: ['table-success','table-primary','table-warning','table-info'], correct: 0, explanation: 'The .table-success class adds a green background to rows or cells, often used to indicate successful or positive states.' },
       { question: 'Which utility class in Bootstrap adds a small amount of margin to all sides of an element?', options: ['p-1','m-1','margin-sm','padding-sm'], correct: 1, explanation: 'The .m-1 class adds a margin of 0.25rem to all sides of an element, useful for adjusting spacing between elements.' },
       { question: 'Which of the following is correct about the data-animation Data attribute of the Popover Plugin?', options: ['Gives the popover a CSS fade transition','Inserts the popover with HTML','Indicates how the popover should be positioned','Assigns delegated tasks to the designated targets'], correct: 0, explanation: 'The data-animation Data attribute of the Popover Plugin gives the popover a CSS fade transition.' },
-      { question: 'How do you initialize a modal using JavaScript in Bootstrap?', options: ["$('#myModal').modal();","$('#myModal').popup();","$('#myModal').showModal();","$('#myModal').display();"], correct: 0, explanation: "The .modal() method initializes or triggers a modal dialog programmatically in Bootstrap. It is part of the built-in Bootstrap JavaScript functionality." },
+      { question: 'How do you initialize a modal using HTML in Bootstrap?', options: ["$('#myModal').modal();","$('#myModal').popup();","$('#myModal').showModal();","$('#myModal').display();"], correct: 0, explanation: "The .modal() method initializes or triggers a modal dialog programmatically in Bootstrap. It is part of the built-in Bootstrap HTML functionality." },
       { question: 'Which utility class adds shadow effects to an element in Bootstrap?', options: ['shadow-box','shadow-lg','element-shadow','shadow-sm'], correct: 1, explanation: 'The shadow-lg class applies a large shadow to an element, while shadow-sm applies a smaller one. Use shadow for default shadow styling.' },
       { question: 'Which class is used to create a close (×) icon?', options: ['btn-close','close-icon','icon-close','close-btn'], correct: 0, explanation: 'The btn-close class creates a cross (×) icon, typically used for dismissing modals or alerts. It is styled for accessibility and responsiveness.' },
       { question: 'What is the default breakpoint for the col-md- class in Bootstrap?', options: ['768px','576px','1200px','992px'], correct: 0, explanation: 'The col-md- class applies styling for medium-sized screens and above, starting from a width of 768px.' },
@@ -180,12 +180,51 @@ const QUESTION_BANK: { [cat: string]: { [level: string]: Question[] } } = {
       { question: 'Which utility creates a horizontal scrollable row?', options: ['.overflow-auto','.scroll-row','.scroll-x','.overflow-x-auto'], correct: 0, explanation: 'The .overflow-auto utility creates a scrollable row.' },
       { question: 'Which of the following bootstrap version should be used to support IE9?', options: ['Bootstrap 1','Bootstrap 2','Bootstrap 3','Bootstrap 4'], correct: 2, explanation: 'It’s the most stable version of bootstrap code and is still supported by their team for critical bug fixes and documentation changes.' },
       { question: 'What is the purpose of the invisible class in Bootstrap?', options: ['Removes the element from the DOM.','Hides the element while preserving its layout and space.','Makes the element transparent but clickable.','Completely hides the element, removing it from the layout.'], correct: 1, explanation: 'The invisible class hides an element visually but preserves its layout and spacing in the DOM. It is useful for cases where space must remain occupied.' },
-      { question: 'Which attribute activates the tooltip component in Bootstrap?', options: ['data-toggle=”tooltip”','tooltip-enable=”true”','data-tooltip=”enable”','tooltip-toggle=”on”'], correct: 0, explanation: 'The data-toggle=”tooltip” attribute initializes tooltips. To make tooltips functional, JavaScript must be activated via $(function() { $(‘[data-toggle=”tooltip”]’).tooltip(); });.' },
+      { question: 'Which attribute activates the tooltip component in Bootstrap?', options: ['data-toggle=”tooltip”','tooltip-enable=”true”','data-tooltip=”enable”','tooltip-toggle=”on”'], correct: 0, explanation: 'The data-toggle=”tooltip” attribute initializes tooltips. To make tooltips functional, HTML must be activated via $(function() { $(‘[data-toggle=”tooltip”]’).tooltip(); });.' },
       { question: 'Which of the following is the foundation of CSS Animation?', options: ['Keyframe','CSS properties','Selector','Transition'], correct: 0, explanation: 'Keyframes are the foundations with the help of which CSS Animations works. They define the display of the animation at the respective stages of its whole duration.' },
       // And 93 more unique advanced Bootstrap questions from Sanfoundry, EngineeringInterviewQuestions, OnlineInterviewQuestions, HackHackathon, PlacementPreparation, etc., ensuring 100 total.
     ]
   }
 };
+
+// Add helper normalizer (place before the QuizPage component)
+function normalizeQuizJson(raw: any): { [level: string]: Question[] } {
+	// If raw is already in expected shape with level keys
+	if (raw && typeof raw === 'object') {
+		const hasLevels = ['basic', 'intermediate', 'advanced'].some(k => Array.isArray(raw[k]));
+		if (hasLevels) {
+			return {
+				basic: (raw.basic || []).map(normalizeQuestion),
+				intermediate: (raw.intermediate || []).map(normalizeQuestion),
+				advanced: (raw.advanced || []).map(normalizeQuestion)
+			};
+		}
+		// If raw is a single array of questions, treat as basic
+		if (Array.isArray(raw)) {
+			return { basic: raw.map(normalizeQuestion), intermediate: [], advanced: [] };
+		}
+	}
+	return { basic: [], intermediate: [], advanced: [] };
+}
+
+function normalizeQuestion(q: any): Question {
+	const opts = q.options || q.choices || q.answers || [];
+	let correctIndex = 0;
+	if (typeof q.correct === 'number') correctIndex = q.correct;
+	else if (typeof q.answer === 'number') correctIndex = q.answer;
+	else if (typeof q.correct === 'string' && !isNaN(parseInt(q.correct, 10))) correctIndex = parseInt(q.correct, 10);
+	// fallback: try to find a value that matches an option string
+	if ((correctIndex === 0 || !opts[correctIndex]) && typeof q.correct === 'string') {
+		const idx = opts.indexOf(q.correct);
+		if (idx >= 0) correctIndex = idx;
+	}
+	return {
+		question: q.question || q.prompt || q.text || '',
+		options: Array.isArray(opts) ? opts : [],
+		correct: correctIndex,
+		explanation: q.explanation || q.explain || q.feedback || ''
+	};
+}
 
 const LEVELS = ['basic', 'intermediate', 'advanced'];
 
@@ -197,9 +236,14 @@ const QuizPage: React.FC = () => {
 
   const quizData = useMemo(() => {
     if (!level) return null;
-    const pool = (QUESTION_BANK[key] && QUESTION_BANK[key][level]) || [];
+
+    // Use embedded QUESTION_BANK (fallback) instead of external JSON imports
+    const cat = key || 'html';
+    const categoryData = (QUESTION_BANK as any)[cat] || (QUESTION_BANK as any)['html'] || {};
+    const pool: Question[] = (categoryData && categoryData[level]) ? categoryData[level] : [];
+
     return {
-      quizTitle: `${key.toUpperCase()} Quiz — ${level[0].toUpperCase() + level.slice(1)} (${pool.length} Qs)`,
+      quizTitle: `${cat.toUpperCase()} Quiz — ${level[0].toUpperCase() + level.slice(1)} (${pool.length} Qs)`,
       questions: pool
     } as QuizData;
   }, [key, level]);
@@ -208,7 +252,7 @@ const QuizPage: React.FC = () => {
     <div className="container-fluid mt-4">
       <div className="row justify-content-center">
         <div className="col-lg-10">
-          <div className={`card ${!level ? 'bg-white text-dark' : 'bg-dark text-white'} shadow-sm`}>
+          <div className={`card-premium ${!level ? '' : 'bg-dark text-white'}`}>
             <div className="card-body">
               {!level ? (
                 <>
@@ -217,22 +261,51 @@ const QuizPage: React.FC = () => {
                     <p className="text-muted">Select a difficulty level. Each level contains curated questions.</p>
                   </div>
                   <div className="row justify-content-center">
-                    <div className="col-md-8">
-                      <div className="row g-3">
-                        {LEVELS.map(l => (
-                          <div key={l} className="col-md-4">
-                            <div className="card h-100 glass-effect border-0 shadow-sm">
-                              <div className="card-body text-center">
-                                <h5 className="card-title text-dark">{l[0].toUpperCase() + l.slice(1)}</h5>
-                                <p className="card-text text-muted small">
-                                  {l === 'basic' ? 'Perfect for beginners' :
-                                   l === 'intermediate' ? 'For those with some experience' :
-                                   'Advanced concepts and challenges'}
+                    <div className="col-md-10">
+                      <div className="row g-4">
+                        {LEVELS.map((l, index) => (
+                          <div key={l} className="col-md-4" style={{ animationDelay: `${index * 0.1}s` }}>
+                            <div className="card-premium h-100 fade-in-up" style={{
+                              background: 'linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(248,250,252,0.98) 100%)',
+                              border: '1px solid rgba(255,255,255,0.8)',
+                              transition: 'all 0.3s ease',
+                              cursor: 'pointer'
+                            }} onClick={() => setLevel(l)}>
+                              <div className="card-body text-center d-flex flex-column">
+                                <div className="mb-3">
+                                  <div style={{
+                                    width: 60,
+                                    height: 60,
+                                    borderRadius: '50%',
+                                    background: l === 'basic' ? 'linear-gradient(135deg, #10b981, #059669)' :
+                                               l === 'intermediate' ? 'linear-gradient(135deg, #f59e0b, #d97706)' :
+                                               'linear-gradient(135deg, #ef4444, #dc2626)',
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'center',
+                                    margin: '0 auto',
+                                    boxShadow: '0 8px 25px rgba(0,0,0,0.15), inset 0 2px 4px rgba(255,255,255,0.2)',
+                                    color: 'white',
+                                    fontSize: '1.5rem',
+                                    fontWeight: 'bold'
+                                  }}>
+                                    {l === 'basic' ? 'B' : l === 'intermediate' ? 'I' : 'A'}
+                                  </div>
+                                </div>
+                                <h5 className="card-title text-dark mb-3" style={{ fontWeight: '600' }}>
+                                  {l[0].toUpperCase() + l.slice(1)}
+                                </h5>
+                                <p className="card-text text-muted small mb-4 flex-grow-1">
+                                  {l === 'basic' ? 'Perfect for beginners starting their journey' :
+                                   l === 'intermediate' ? 'For those with some experience looking to advance' :
+                                   'Advanced concepts and challenging problems'}
                                 </p>
                                 <button
-                                  className="btn btn-primary w-100"
-                                  onClick={() => setLevel(l)}
+                                  className="btn btn-premium w-100 mt-auto"
+                                  onClick={(e) => { e.stopPropagation(); setLevel(l); }}
+                                  style={{ transition: 'all 0.3s ease' }}
                                 >
+                                  <i className="bi bi-play-fill me-2"></i>
                                   Start {l[0].toUpperCase() + l.slice(1)} Quiz
                                 </button>
                               </div>
